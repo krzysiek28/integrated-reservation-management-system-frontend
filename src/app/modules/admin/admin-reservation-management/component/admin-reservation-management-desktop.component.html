@@ -1,0 +1,61 @@
+<p>admin-reservation-management-dekstop works!</p>
+
+
+<!--TEMPORARY-->
+
+<table>
+  <thead>
+  <th>id</th>
+  <th>Date</th>
+  <th>TimeFrom</th>
+  <th>TimeTo</th>
+  <th>Status</th>
+  <th>Comment</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let reservation of reservationList">
+    <td>{{reservation.id}}</td>
+    <td>{{reservation.date}}</td>
+    <td>{{reservation.timeFrom}}</td>
+    <td>{{reservation.timeTo}}</td>
+    <td>{{reservation.status}}</td>
+    <td>{{reservation.comment}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="addReservation()" #reservationListForm="ngForm">
+      <div class="form-group">
+        <label for="date">date</label>
+        <input type="date" [(ngModel)]="reservationInput.date"
+               class="form-control"
+               id="date"
+               name="date"
+               placeholder="Enter date">
+      </div>
+      <div class="form-group">
+        <label for="comment">comment</label>
+        <input type="text" [(ngModel)]="reservationInput.comment"
+               class="form-control"
+               id="comment"
+               name="comment"
+               placeholder="Enter comment">
+      </div>
+      <div class="form-group">
+        <label for="comment">status</label>
+        <input type="text" [(ngModel)]="reservationInput.status"
+               class="form-control"
+               id="status"
+               name="status"
+               placeholder="Enter comment">
+      </div>
+      <button type="submit" [disabled]="!reservationListForm.form.valid"
+              class="btn btn-info">Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+<!--TEMPORARY-->

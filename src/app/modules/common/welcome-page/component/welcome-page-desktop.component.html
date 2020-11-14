@@ -1,0 +1,53 @@
+<div class="content" role="main">
+
+  <h1>Welcome Page body</h1>
+  <h3>{{text}}</h3>
+
+  <table>
+    <thead>
+    <th>id</th>
+    <th>test1</th>
+    <th>test2</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let t of test">
+      <td>{{t.id}}</td>
+      <td>{{t.test1}}</td>
+      <td>{{t.test2}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="card my-5">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #testForm="ngForm">
+        <div class="form-group">
+          <label for="test1">test1</label>
+          <input type="text" [(ngModel)]="testInp.test1"
+                 class="form-control"
+                 id="test1"
+                 name="test1"
+                 placeholder="Enter test1"
+                 required #test1="ngModel">
+        </div>
+        <div [hidden]="!test1.pristine" class="alert alert-danger">test1 is required</div>
+        <div class="form-group">
+          <label for="test2">test2</label>
+          <input type="text" [(ngModel)]="testInp.test2"
+                 class="form-control"
+                 id="test2"
+                 name="test2"
+                 placeholder="Enter test2"
+                 required #test2="ngModel">
+          <div [hidden]="!test2.pristine" class="alert alert-danger">test2 is required</div>
+        </div>
+        <button type="submit" [disabled]="!testForm.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <button (click)="getText()">getText</button>
+
+</div>

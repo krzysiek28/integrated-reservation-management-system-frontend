@@ -3,20 +3,28 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './root/app.component';
-import {WelcomePageModule} from './modules/welcome-page/welcome-page.module';
+import {WelcomePageModule} from './modules/common/welcome-page/welcome-page.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ReservationModule} from './modules/reservation/reservation.module';
+import {ReservationModule} from './modules/common/reservation/reservation.module';
 import {MatButtonModule} from '@angular/material/button';
+import {HttpClientModule} from '@angular/common/http';
+import {AccountManagementModule} from './account-management/account-management.module';
+import {AdminReservationManagementModule} from './modules/admin/admin-reservation-management/admin-reservation-management.module';
+import {AppContextService} from './context/app-context.service';
 
 export let INTERNAL_MODULES = [
   WelcomePageModule,
-  ReservationModule
+  ReservationModule,
+  AccountManagementModule,
+  AdminReservationManagementModule
 ];
 
 export let EXTERNAL_MODULES = [
   BrowserModule,
   AppRoutingModule,
-  MatButtonModule
+  MatButtonModule,
+  BrowserAnimationsModule,
+  HttpClientModule
 ];
 
 @NgModule({
@@ -25,10 +33,9 @@ export let EXTERNAL_MODULES = [
   ],
   imports: [
     INTERNAL_MODULES,
-    EXTERNAL_MODULES,
-    BrowserAnimationsModule
+    EXTERNAL_MODULES
   ],
-  providers: [],
+  providers: [AppContextService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
