@@ -2,6 +2,7 @@ export class AppConsts {
   public static SERVER_BASIC_URL = 'http://localhost:9500';
   public static RESERVATION_API_PATH = '/reservationsApi';
   public static ADMIN_RESERVATION_MANAGEMENT_API_PATH = '/adminReservationsApi';
+  public static AUTH_API = '/authApi';
 }
 
 export enum ApplicationVariant {

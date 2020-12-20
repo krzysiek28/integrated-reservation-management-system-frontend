@@ -22,7 +22,7 @@ export class AdminReservationManagementDesktopComponent implements OnInit {
   }
 
   private findAvailableReservations() {
-    this._reservationApiService.findAvailableReservationsByDateRange(new Date(2020,11,11), new Date(2022,2,12)).subscribe(data => {
+    this._reservationApiService.findAvailableReservationsByDateRange(new Date(2017,11,11), new Date(2022,2,12)).subscribe(data => {
       this.reservationList = data;
     });
   }

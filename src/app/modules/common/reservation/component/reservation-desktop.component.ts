@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ReservationFormGenerator} from '../utils/reservation-form-generator';
 import {FormGroup} from '@angular/forms';
+import {ReservationControlNames} from '../utils/reservation-consts';
 
 @Component({
   selector: 'app-reservation-desktop',
@@ -10,6 +11,7 @@ import {FormGroup} from '@angular/forms';
 export class ReservationDesktopComponent implements OnInit {
 
   formGroup: FormGroup;
+  reservationControlNames = ReservationControlNames;
 
   constructor() {
     this.formGroup = ReservationFormGenerator.generateFormGroup();

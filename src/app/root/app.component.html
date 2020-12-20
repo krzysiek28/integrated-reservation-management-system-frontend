@@ -17,7 +17,14 @@
     <a class="card card-small" routerLink="/registration">Rejestracja</a>
   </div>
 
+  <div class="card-container" *ngIf="isLoggedIn">
+    <a class="card card-small" routerLink="/login">{{ username }}</a>
+    <a class="card card-small" (click)="logout()">Wyloguj</a>
+  </div>
+
 </div>
+
+<router-outlet></router-outlet>
 
 <div class="content" role="main">
   <input type="hidden" #selection>
@@ -51,4 +58,4 @@
   </svg>
 </div>
 
-<router-outlet></router-outlet>
+

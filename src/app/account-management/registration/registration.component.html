@@ -1,5 +1,53 @@
 <div class="content" role="main">
+  <mat-card>
+    <mat-card-title>
+      <img mat-card-lg-image
+           id="profile-img"
+           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+           class="profile-img-card"
+      />
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="registrationFormGroup">
+        <mat-form-field class="full-width">
+          <mat-label>Nazwa użytkownika</mat-label>
+          <input matInput [type]="'text'" [formControlName]="accountControlNames.USERNAME" placeholder="Nazwa użytkownika">
+          <mat-error *ngIf="registrationFormGroup.controls[accountControlNames.USERNAME].hasError('required')">
+            Nazwa użytkownika jest wymagana
+          </mat-error>
+        </mat-form-field>
 
-  <p>registration works!</p>
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput [type]="'email'" [formControlName]="accountControlNames.EMAIL" placeholder="Email">
+          <mat-error *ngIf="registrationFormGroup.controls[accountControlNames.EMAIL].invalid">
+            {{getEmailErrorMessage()}}
+          </mat-error>
+        </mat-form-field>
 
+        <mat-form-field class="full-width">
+          <mat-label>Hasło</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" [formControlName]="accountControlNames.PASSWORD">
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="registrationFormGroup.controls[accountControlNames.PASSWORD].hasError('required')">
+            Hasło jest wymagane
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Powtórz hasło</mat-label>
+          <input matInput [type]="'password'" [formControl]="confirmationPasswordFormControl">
+          <mat-error *ngIf="registrationFormGroup.controls[accountControlNames.PASSWORD].hasError('required')">
+            Hasło jest wymagane
+          </mat-error>
+          <div *ngIf="passwordsNotMatch">
+            Hasła się nie zgadzają
+          </div>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="full-width" style="margin-top: 20px" (click)="onSubmit()">Zarejestruj</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

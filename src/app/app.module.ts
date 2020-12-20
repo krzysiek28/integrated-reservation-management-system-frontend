@@ -11,12 +11,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {AccountManagementModule} from './account-management/account-management.module';
 import {AdminReservationManagementModule} from './modules/admin/admin-reservation-management/admin-reservation-management.module';
 import {AppContextService} from './context/app-context.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export let INTERNAL_MODULES = [
   WelcomePageModule,
   ReservationModule,
   AccountManagementModule,
-  AdminReservationManagementModule
+  AdminReservationManagementModule,
 ];
 
 export let EXTERNAL_MODULES = [
@@ -33,7 +35,9 @@ export let EXTERNAL_MODULES = [
   ],
   imports: [
     INTERNAL_MODULES,
-    EXTERNAL_MODULES
+    EXTERNAL_MODULES,
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AppContextService],
   bootstrap: [AppComponent]
