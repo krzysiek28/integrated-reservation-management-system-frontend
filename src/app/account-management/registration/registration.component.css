@@ -41,3 +41,21 @@ label {
 .full-width {
   width: 100%;
 }
+
+.alert-danger {
+  background-color: #902c2b;
+}
+
+.alert-success {
+  background-color: #4e905f;
+}
+
+.alert{
+  width: 300px;
+  color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+

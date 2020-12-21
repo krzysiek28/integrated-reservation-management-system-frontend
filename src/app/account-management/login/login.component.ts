@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {TokenStorageService} from '../services/token-storage.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 import {AccountManagementFormGenerator} from '../utils/account-management-form-generator';
 import {AccountManagementControlNames} from '../utils/account-management-consts';
 
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this._tokenStorage.getToken()) {
       this.isLoggedIn = true;
+      this.goToWelcomePage();
     }
   }
 
@@ -36,12 +37,10 @@ export class LoginComponent implements OnInit {
     if(this.loginFormGroup.valid){
       this._authService.login(this.loginFormGroup.getRawValue()).subscribe(
         data => {
-          console.log('normalny case');
           this._tokenStorage.saveToken(data.token);
           this._tokenStorage.saveUser(data);
 
           this.reloadPage();
-          this.goToWelcomePage();
         },
         err => {
           console.log(err.error);
@@ -54,7 +53,9 @@ export class LoginComponent implements OnInit {
   }
 
   goToWelcomePage() {
-    this._router.navigate(['/welcome-page']);
+    setTimeout(() => {
+      this._router.navigate(['/welcome-page']);
+    }, 3000);
   }
 
   reloadPage(): void {

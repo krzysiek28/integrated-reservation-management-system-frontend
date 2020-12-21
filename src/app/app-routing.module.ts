@@ -5,6 +5,7 @@ import {ReservationDesktopComponent} from './modules/common/reservation/componen
 import {LoginComponent} from './account-management/login/login.component';
 import {RegistrationComponent} from './account-management/registration/registration.component';
 import {AdminReservationManagementDesktopComponent} from './modules/admin/admin-reservation-management/component/admin-reservation-management-desktop.component';
+import {ProfileComponent} from './account-management/profile/component/profile.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/welcome-page', pathMatch: 'full'},
@@ -12,7 +13,7 @@ const routes: Routes = [
   {path: 'reservation', component: ReservationDesktopComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
-  {path: 'profile', component: RegistrationComponent},
+  {path: 'profile', component: ProfileComponent},
   {path: 'admin-reservation-management', component: AdminReservationManagementDesktopComponent}
 ];
 

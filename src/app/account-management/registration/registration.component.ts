@@ -3,6 +3,8 @@ import {AuthService} from '../services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AccountManagementFormGenerator} from '../utils/account-management-form-generator';
 import {AccountManagementControlNames} from '../utils/account-management-consts';
+import {LoginRequest} from '../objects/LoginRequest';
+import {TokenStorageService} from '../services/token-storage.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -16,17 +18,24 @@ export class RegistrationComponent implements OnInit {
   registrationFormGroup: FormGroup;
   isSuccessful = false;
   isSignUpFailed = false;
+  isLoggedIn = false;
   errorMessage = '';
   hidePassword = true;
   confirmationPasswordFormControl = new FormControl('', Validators.required);
   passwordsNotMatch = false;
 
-  constructor(private _authService: AuthService,
-              private _router: Router) {
+  constructor(private _router: Router,
+              private _authService: AuthService,
+              private _tokenStorage: TokenStorageService) {
     this.registrationFormGroup = AccountManagementFormGenerator.generateRegisterFormGroup();
   }
 
   ngOnInit(): void {
+    if (this._tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.goToWelcomePage();
+    }
+
     this.registrationFormGroup.get(this.accountControlNames.PASSWORD).valueChanges.subscribe(() => {
       this.confirmationPasswordFormControl.setErrors(null);
       this.passwordsNotMatch = false;
@@ -45,20 +54,50 @@ export class RegistrationComponent implements OnInit {
       } else {
         this._authService.register(this.registrationFormGroup.getRawValue()).subscribe(
           data => {
-            console.log(data);
             this.isSuccessful = true;
             this.isSignUpFailed = false;
+
+            this.logInToApp();
           },
           err => {
             this.errorMessage = err.error.message;
             this.isSignUpFailed = true;
           }
         );
-        console.log('goToWelcome');
-        this.reloadPage();
-        this.goToWelcomePage();
       }
     }
+  }
+
+  logInToApp() {
+    this._authService.login(<LoginRequest>{
+      userName: this.registrationFormGroup.get(this.accountControlNames.USERNAME).value,
+      password: this.registrationFormGroup.get(this.accountControlNames.PASSWORD).value
+    }).subscribe(
+      data => {
+        this._tokenStorage.saveToken(data.token);
+        this._tokenStorage.saveUser(data);
+
+        this.isLoggedIn = true;
+        this.reloadPage();
+      },
+      () => {
+        this.goToLoginPage();
+      }
+    );
+  }
+
+  goToLoginPage() {
+    this._router.navigate(['/login']);
+  }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
+
+  goToWelcomePage() {
+    setTimeout(() => {
+      this._router.navigate(['/welcome-page']);
+    }, 3000);
   }
 
   getEmailErrorMessage() {
@@ -75,13 +114,5 @@ export class RegistrationComponent implements OnInit {
     }
 
     return this.passwordsNotMatch ? 'Hasła się nie zgadzają' : '';
-  }
-
-  goToWelcomePage() {
-    this._router.navigate(['/welcome-page']);
-  }
-
-  reloadPage(): void {
-    window.location.reload();
   }
 }
