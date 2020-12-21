@@ -1,5 +1,26 @@
 <div class="content" role="main">
 
+
+  <div class="container" *ngIf="userModel; else loggedOut">
+      <strong>{{ userModel.userName }}</strong> Profile
+    <p>
+      <strong>Token:</strong>
+      {{ userModel.token.substring(0, 20) }} ...
+      {{ userModel.token.substr(userModel.token.length - 20) }}
+    </p>
+    <p>
+      <strong>Email:</strong>
+      {{ userModel.email }}
+    </p>
+    <strong>Roles:</strong>
+    {{ userModel.role }}
+  </div>
+
+  <ng-template #loggedOut>
+    Please login.
+  </ng-template>
+
+
   <h1>Welcome Page body</h1>
   <h3>{{text}}</h3>
 

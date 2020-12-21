@@ -14,14 +14,17 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
+import { ProfileDesktopComponent } from './profile/component/profile-desktop.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileDesktopComponent
   ],
   imports: [
     CommonModule,
+    BrowserModule,
     HttpClientModule,
     MatCardModule,
     MatFormFieldModule,

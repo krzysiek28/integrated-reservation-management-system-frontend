@@ -17,8 +17,8 @@
     <a class="card card-small" routerLink="/registration">Rejestracja</a>
   </div>
 
-  <div class="card-container" *ngIf="isLoggedIn">
-    <a class="card card-small" routerLink="/login">{{ username }}</a>
+  <div class="card-container" *ngIf="applicationVariant != applicationVariants.NO_CONTEXT">
+    <a class="card card-small" routerLink="/profile">{{ userName }}</a>
     <a class="card card-small" (click)="logout()">Wyloguj</a>
   </div>
 

@@ -27,13 +27,20 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.registrationFormGroup.get(this.accountControlNames.PASSWORD).valueChanges.subscribe(() => this.passwordsNotMatch = false);
-    this.confirmationPasswordFormControl.valueChanges.subscribe(() => this.passwordsNotMatch = false);
+    this.registrationFormGroup.get(this.accountControlNames.PASSWORD).valueChanges.subscribe(() => {
+      this.confirmationPasswordFormControl.setErrors(null);
+      this.passwordsNotMatch = false;
+    });
+    this.confirmationPasswordFormControl.valueChanges.subscribe(() => {
+      this.confirmationPasswordFormControl.setErrors(null);
+      this.passwordsNotMatch = false;
+    });
   }
 
   onSubmit(): void {
     if (this.registrationFormGroup.valid && this.confirmationPasswordFormControl.valid) {
       if (this.registrationFormGroup.controls[this.accountControlNames.PASSWORD].value !== this.confirmationPasswordFormControl.value) {
+        this.confirmationPasswordFormControl.setErrors({'incorrect': true});
         this.passwordsNotMatch = true;
       } else {
         this._authService.register(this.registrationFormGroup.getRawValue()).subscribe(
@@ -47,8 +54,9 @@ export class RegistrationComponent implements OnInit {
             this.isSignUpFailed = true;
           }
         );
-        console.log("goToWelcome");
-        this.goToWelcomePage(); //todo not working
+        console.log('goToWelcome');
+        this.reloadPage();
+        this.goToWelcomePage();
       }
     }
   }
@@ -61,7 +69,19 @@ export class RegistrationComponent implements OnInit {
     return this.registrationFormGroup.controls[this.accountControlNames.EMAIL].hasError('email') ? 'Nie poprawny email' : '';
   }
 
+  getConfirmationPasswordErrorMessage() {
+    if (this.confirmationPasswordFormControl.hasError('required')) {
+      return 'Pole "powtórz hasło" jest wymagane';
+    }
+
+    return this.passwordsNotMatch ? 'Hasła się nie zgadzają' : '';
+  }
+
   goToWelcomePage() {
     this._router.navigate(['/welcome-page']);
+  }
+
+  reloadPage(): void {
+    window.location.reload();
   }
 }

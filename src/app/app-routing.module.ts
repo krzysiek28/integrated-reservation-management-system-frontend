@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: 'reservation', component: ReservationDesktopComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
+  {path: 'profile', component: RegistrationComponent},
   {path: 'admin-reservation-management', component: AdminReservationManagementDesktopComponent}
 ];
 

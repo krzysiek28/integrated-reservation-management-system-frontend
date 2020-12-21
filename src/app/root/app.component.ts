@@ -11,9 +11,8 @@ export class AppComponent implements OnInit {
   title = 'irms-frontend';
   applicationVariants = ApplicationVariant;
   applicationVariant: ApplicationVariant;
-  private role: string;
   isLoggedIn = false;
-  username: string;
+  userName: string;
 
   constructor(private tokenStorageService: TokenStorageService) {
     this.applicationVariant = ApplicationVariant.NO_CONTEXT;
@@ -26,11 +25,11 @@ export class AppComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
 
       switch (user.role) {
-        case 'USER_ROLE': {
+        case 'ROLE_USER': {
           this.applicationVariant = this.applicationVariants.LOGGED_AS_USER;
           break;
         }
-        case 'ADMIN_ROLE':{
+        case 'ROLE_ADMIN':{
           this.applicationVariant = this.applicationVariants.LOGGED_AS_ADMIN;
           break;
         }
@@ -40,7 +39,7 @@ export class AppComponent implements OnInit {
         }
       }
 
-      this.username = user.username;
+      this.userName = user.userName;
     }
   }
 

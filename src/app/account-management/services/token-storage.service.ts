@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {LoggedUserModel} from '../objects/LoggedUserModel';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -22,12 +24,13 @@ export class TokenStorageService {
     return sessionStorage.getItem(TOKEN_KEY);
   }
 
-  public saveUser(user): void {
+  public saveUser(user: LoggedUserModel): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  public getUser(): any {
+  public getUser(): LoggedUserModel {
     return JSON.parse(sessionStorage.getItem(USER_KEY));
   }
+
 }
