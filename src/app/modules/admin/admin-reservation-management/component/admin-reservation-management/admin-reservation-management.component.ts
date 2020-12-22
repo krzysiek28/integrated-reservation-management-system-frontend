@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AdminReservationAddDialog} from './add-reservation-dialog/admin-reservation-add-dialog';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {AdminReservationsAddDialog} from './add-reservations-dialog/admin-reservations-add-dialog';
+import {AdminReservationManagementApiService} from '../../services/admin-reservation-management-api.service';
 
 @Component({
   selector: 'app-admin-reservation-management',
@@ -17,22 +18,21 @@ export class AdminReservationManagementComponent implements OnInit {
 
   visitDurationStates = ReservationTimeStates.TIME_DURATION_STATES;
   breakDurationStates = ReservationTimeStates.BREAK_DURATION_STATES;
-  selectedVisitDuration: string;
-  selectedBreakDuration: string;
-  reservationModel: ReservationModel;
-  reservationModelList: ReservationModel[];
   reservationManagementControlNames = ReservationManagementControlNames;
   singleReservationManagementFormGroup: FormGroup;
   cycleReservationManagementFormGroup: FormGroup;
   selectedTab = new FormControl(0);
+  reservationList: ReservationModel[];
 
-  constructor(private _dialog: MatDialog) {
+  constructor(private _dialog: MatDialog,
+              private _reservationApiService: AdminReservationManagementApiService) {
   }
 
   ngOnInit(): void {
     this.singleReservationManagementFormGroup = AdminReservationManagementFormGenerator.generateReservationManagementFormGroup();
     this.cycleReservationManagementFormGroup = AdminReservationManagementFormGenerator.generateMultipleReservationManagementFormGroup();
     this.initHandlers();
+    this.fetchReservationList(this.getDateControl(this.singleReservationManagementFormGroup).value);
   }
 
   private initHandlers() {
@@ -60,8 +60,9 @@ export class AdminReservationManagementComponent implements OnInit {
   }
 
   fetchReservationList(date: Date) {
-    console.log('fetchData');
-    console.log(date);
+    this._reservationApiService.fetchReservationsByDate(date).subscribe((response) => {
+      this.reservationList = response;
+    }, error => console.log('error occured: ', error));
   }
 
   addReservation() {
@@ -77,14 +78,21 @@ export class AdminReservationManagementComponent implements OnInit {
   }
 
   private openAddReservationDialog(): void {
+    let model = this.singleReservationManagementFormGroup.getRawValue();
     const dialogRef = this._dialog.open(AdminReservationAddDialog, {
       width: '450px',
-      data: this.singleReservationManagementFormGroup.getRawValue()
+      data: <ReservationModel> {
+        date: model.date,
+        timeFrom: this.parseTimeToDateTime(model.date, model.timeFrom),
+        timeTo: this.parseTimeToDateTime(model.date, model.timeTo),
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (isNotNullOrUndefined(result)) {
-        this.fetchReservationList(result.date);
+        this._reservationApiService.addReservation(result).subscribe(() => {
+          this.fetchReservationList(result.date);
+        }, error => console.log('error occured: ', error));
       }
     });
   }
@@ -97,7 +105,9 @@ export class AdminReservationManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (isNotNullOrUndefined(result)) {
-        this.fetchReservationList(result.date);
+        this._reservationApiService.addReservations(result).subscribe(() => {
+          this.fetchReservationList(result.date);
+        }, error => console.log('error occured: ', error));
       }
     });
   }
@@ -140,7 +150,7 @@ export class AdminReservationManagementComponent implements OnInit {
     return this.addTime(timeFrom, visitDuration);
   }
 
-  private addTime(time: Date, timeDuration: string) :Date {
+  private addTime(time: Date, timeDuration: string): Date {
     let newTime = new Date(time);
     let minutes = time.getMinutes() + this.getMinutesFromStringTimeDuration(timeDuration);
     let hours = time.getHours() + this.getHoursFromStringTimeDuration(timeDuration);

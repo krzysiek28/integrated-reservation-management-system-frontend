@@ -21,6 +21,8 @@ import { AdminReservationsAddDialog } from './component/admin-reservation-manage
 import { ReservationTableComponent } from './component/admin-reservation-management/reservation-table/reservation-table.component';
 import { ReservationRowComponent } from './component/admin-reservation-management/reservation-table/reservation-row/reservation-row.component';
 import { ReservationColComponent } from './component/admin-reservation-management/reservation-table/reservation-col/reservation-col.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -37,6 +39,8 @@ import { ReservationColComponent } from './component/admin-reservation-managemen
     MatExpansionModule,
     MatSelectModule,
     MatDialogModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
   declarations: [
     AdminReservationManagementDesktopComponent,

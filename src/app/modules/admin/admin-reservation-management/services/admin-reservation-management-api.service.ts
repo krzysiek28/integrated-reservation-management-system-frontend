@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {AppConsts} from '../../../../root/app-consts';
 import {ReservationModel} from '../../../../objects/models/ReservationModel';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AdminReservationManagementApiService {
@@ -20,4 +21,8 @@ export class AdminReservationManagementApiService {
     return this.http.post<Array<ReservationModel>>(this._url + '/reservations', reservations);
   }
 
+  public fetchReservationsByDate(date: Date): Observable<ReservationModel[]> {
+    let params = new HttpParams().set('date', new Date(date).toDateString());
+    return this.http.get<ReservationModel[]>(this._url + '/reservationsByDate', {params: params});
+  }
 }

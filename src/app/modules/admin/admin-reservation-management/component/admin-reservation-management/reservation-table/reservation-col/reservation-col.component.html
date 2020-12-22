@@ -1,1 +1,14 @@
-<p>reservation-col works!</p>
+<mat-toolbar style="display: block" *ngIf="reservationByDate && reservationByDate.length > 0">
+  <h1 class="align-center"> Data: {{reservationByDate[0].date | date: 'shortDate'}}</h1>
+  <div *ngFor="let reservation of reservationByDate;">
+    <mat-toolbar-row [ngClass]="getClassName(reservation)" class="row">
+      <span>Godzina rozpoczęcia {{reservation.timeFrom }}</span>
+      <span class="spacer"></span>
+      <span>Godzina zakończenia {{reservation.timeTo }}</span>
+      <span class="spacer"></span>
+      <button *ngIf="reservation.status === reservationStatuses.AVAILABLE" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (submit)="removeReservation($event)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </div>
+</mat-toolbar>
