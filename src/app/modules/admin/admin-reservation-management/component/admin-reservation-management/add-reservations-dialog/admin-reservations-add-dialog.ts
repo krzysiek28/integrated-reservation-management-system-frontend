@@ -11,7 +11,8 @@ export class AdminReservationsAddDialog {
 
   constructor(
     public dialogRef: MatDialogRef<AdminReservationsAddDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: ReservationModel) {
+    @Inject(MAT_DIALOG_DATA) public data: ReservationModel[]) {
+    console.log(data);
   }
 
   onNoClick(): void {

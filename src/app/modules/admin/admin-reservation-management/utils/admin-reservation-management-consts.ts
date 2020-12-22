@@ -11,6 +11,7 @@ export class ReservationManagementControlNames {
   public static TIME_TO: string = 'timeTo';
   public static VISIT_DURATION: string = 'visitDuration';
   public static BREAK_DURATION: string = 'breakDuration';
+  public static VISIT_COUNT: string = 'visitCount';
 }
 
 export class ReservationTimeStates {

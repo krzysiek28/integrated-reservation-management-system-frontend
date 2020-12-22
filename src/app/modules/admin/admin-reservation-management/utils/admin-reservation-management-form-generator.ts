@@ -15,9 +15,9 @@ export class AdminReservationManagementFormGenerator {
     return new FormGroup({
       [ReservationManagementControlNames.DATE]: new FormControl((new Date()).toISOString(), Validators.required),
       [ReservationManagementControlNames.TIME_FROM]: new FormControl('', Validators.required),
-      [ReservationManagementControlNames.TIME_TO]: new FormControl('', Validators.required),
       [ReservationManagementControlNames.VISIT_DURATION]: new FormControl('', Validators.required),
       [ReservationManagementControlNames.BREAK_DURATION]: new FormControl('', Validators.required),
+      [ReservationManagementControlNames.VISIT_COUNT]: new FormControl(1, [Validators.required, Validators.min(1), Validators.max(20)])
     });
   }
 }

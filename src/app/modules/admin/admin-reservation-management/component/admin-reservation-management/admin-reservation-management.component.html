@@ -9,16 +9,25 @@
             <input matInput [matDatepicker]="picker" [formControlName]="reservationManagementControlNames.DATE">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="singleReservationManagementFormGroup.controls[reservationManagementControlNames.DATE].hasError('required')">
+              Pole jest wymagane
+            </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="fill" class="full-width">
             <mat-label>Godzina rozpoczęcia</mat-label>
             <input matInput [type]="'time'" [formControlName]="reservationManagementControlNames.TIME_FROM" placeholder="Data rozpoczęcia">
+            <mat-error *ngIf="singleReservationManagementFormGroup.controls[reservationManagementControlNames.TIME_FROM].hasError('required')">
+              Pole jest wymagane
+            </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="fill" class="full-width">
             <mat-label>Godzina zakończenia</mat-label>
             <input matInput [type]="'time'" [formControlName]="reservationManagementControlNames.TIME_TO" placeholder="Data zakończenia">
+            <mat-error *ngIf="singleReservationManagementFormGroup.controls[reservationManagementControlNames.TIME_TO].hasError('required')">
+              Pole jest wymagane
+            </mat-error>
           </mat-form-field>
 
           <button mat-raised-button color="primary" class="full-width" style="margin-top: 20px" (click)="addReservation()">Dodaj</button>
@@ -32,11 +41,17 @@
             <input matInput [matDatepicker]="datePicker" [formControlName]="reservationManagementControlNames.DATE">
             <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
             <mat-datepicker #datePicker></mat-datepicker>
+            <mat-error *ngIf="cycleReservationManagementFormGroup.controls[reservationManagementControlNames.DATE].hasError('required')">
+              Pole jest wymagane
+            </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="fill" class="full-width">
             <mat-label>Godzina rozpoczęcia</mat-label>
             <input matInput [type]="'time'" [formControlName]="reservationManagementControlNames.TIME_FROM" placeholder="Data rozpoczęcia">
+            <mat-error *ngIf="cycleReservationManagementFormGroup.controls[reservationManagementControlNames.TIME_FROM].hasError('required')">
+              Pole jest wymagane
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="full-width">
@@ -44,6 +59,9 @@
             <mat-select [formControlName]="reservationManagementControlNames.VISIT_DURATION" name="visitDuration">
               <mat-option *ngFor="let visitDuration of visitDurationStates" [value]="visitDuration">{{visitDuration}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="cycleReservationManagementFormGroup.controls[reservationManagementControlNames.VISIT_DURATION].hasError('required')">
+              Pole jest wymagane
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="full-width">
@@ -51,9 +69,26 @@
             <mat-select [formControlName]="reservationManagementControlNames.BREAK_DURATION" name="breakDuration">
               <mat-option *ngFor="let breakDuration of breakDurationStates" [value]="breakDuration">{{breakDuration}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="cycleReservationManagementFormGroup.controls[reservationManagementControlNames.BREAK_DURATION].hasError('required')">
+              Pole jest wymagane
+            </mat-error>
           </mat-form-field>
 
-          <button mat-raised-button color="primary" class="full-width" style="margin-top: 20px" (click)="addAllReservation()">Dodaj Wszystkie</button>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Ilość wizyt</mat-label>
+            <input type="number" matInput name="value" placeholder="ilość" [formControlName]="reservationManagementControlNames.VISIT_COUNT">
+            <mat-error *ngIf="cycleReservationManagementFormGroup.controls[reservationManagementControlNames.VISIT_COUNT].hasError('required')">
+              Pole jest wymagane
+            </mat-error>
+            <mat-error *ngIf="cycleReservationManagementFormGroup.controls[reservationManagementControlNames.VISIT_COUNT].hasError('max')">
+              Wartość nie może przekraczać 20
+            </mat-error>
+            <mat-error *ngIf="cycleReservationManagementFormGroup.controls[reservationManagementControlNames.VISIT_COUNT].hasError('min')">
+              Wartość nie może być mniejsza niż 0
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="full-width" style="margin-top: 20px" (click)="addAllReservations()">Dodaj Wszystkie</button>
         </form>
 
       </mat-tab>
