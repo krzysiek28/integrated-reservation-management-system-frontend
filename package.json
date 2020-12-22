@@ -26,6 +26,7 @@
     "cors": "^2.8.5",
     "jquery": "^3.5.1",
     "material-design-icons": "^3.0.1",
+    "material-time-control": "github:SteveDunlap13/MaterialTimeControl",
     "popper.js": "^1.14.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

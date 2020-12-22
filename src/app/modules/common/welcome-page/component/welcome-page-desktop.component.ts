@@ -14,26 +14,20 @@ import {AppContextService} from '../../../../context/app-context.service';
 })
 export class WelcomePageDesktopComponent implements OnInit {
 
-  test: TestModel[];
-  testInp: TestModel;
-  text: string;
   userModel: LoggedUserModel;
 
-  constructor(private _testService: TestService,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
               private _appContext: AppContextService) {
-    this.testInp = new TestModel();
   }
 
   ngOnInit() {
-    this.findAllTest();
     if(this._appContext.hasUserContext()){
       this.userModel = this._appContext.getUser();
     }
   }
 
-  findAllTest() {
+/*  findAllTest() {
     this._testService.findAll().subscribe(data => {
       this.test = data;
     });
@@ -48,5 +42,5 @@ export class WelcomePageDesktopComponent implements OnInit {
        this.text = response.text
        this.findAllTest()
      });
-  }
+  }*/
 }

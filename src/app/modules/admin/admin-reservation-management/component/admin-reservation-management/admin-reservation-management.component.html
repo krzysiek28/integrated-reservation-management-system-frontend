@@ -1,0 +1,66 @@
+<div class="container">
+
+    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" [selectedIndex]="selectedTab.value"
+                                                                   (selectedIndexChange)="selectedTab.setValue($event)">
+      <mat-tab label="Pojedynczo">
+        <form class = "reservationForm" [formGroup]="singleReservationManagementFormGroup">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Data</mat-label>
+            <input matInput [matDatepicker]="picker" [formControlName]="reservationManagementControlNames.DATE">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Godzina rozpoczęcia</mat-label>
+            <input matInput [type]="'time'" [formControlName]="reservationManagementControlNames.TIME_FROM" placeholder="Data rozpoczęcia">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Godzina zakończenia</mat-label>
+            <input matInput [type]="'time'" [formControlName]="reservationManagementControlNames.TIME_TO" placeholder="Data zakończenia">
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="full-width" style="margin-top: 20px" (click)="addReservation()">Dodaj</button>
+        </form>
+      </mat-tab>
+
+      <mat-tab label="Cyklicznie">
+        <form class = "reservationForm" [formGroup]="cycleReservationManagementFormGroup">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Data</mat-label>
+            <input matInput [matDatepicker]="datePicker" [formControlName]="reservationManagementControlNames.DATE">
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Godzina rozpoczęcia</mat-label>
+            <input matInput [type]="'time'" [formControlName]="reservationManagementControlNames.TIME_FROM" placeholder="Data rozpoczęcia">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Czas trwania wizyty</mat-label>
+            <mat-select [formControlName]="reservationManagementControlNames.VISIT_DURATION" name="visitDuration">
+              <mat-option *ngFor="let visitDuration of visitDurationStates" [value]="visitDuration">{{visitDuration}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Czas trwania przerwy między wizytami</mat-label>
+            <mat-select [formControlName]="reservationManagementControlNames.BREAK_DURATION" name="breakDuration">
+              <mat-option *ngFor="let breakDuration of breakDurationStates" [value]="breakDuration">{{breakDuration}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="full-width" style="margin-top: 20px" (click)="addAllReservation()">Dodaj Wszystkie</button>
+        </form>
+
+      </mat-tab>
+    </mat-tab-group>
+</div>
+<div class="container">
+
+
+      <h1>Lista</h1>
+</div>

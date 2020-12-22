@@ -26,7 +26,7 @@ export let EXTERNAL_MODULES = [
   AppRoutingModule,
   MatButtonModule,
   BrowserAnimationsModule,
-  HttpClientModule
+  HttpClientModule,
 ];
 
 @NgModule({

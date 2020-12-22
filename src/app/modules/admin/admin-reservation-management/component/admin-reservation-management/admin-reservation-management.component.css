@@ -1,0 +1,23 @@
+.container {
+  display: inline-block;
+  width: 50%;
+}
+
+.reservationForm {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-tab-group {
+  max-width: 350px;
+}
+
+.reservationForm {
+  margin: 20px;
+  align-items: center;
+}
