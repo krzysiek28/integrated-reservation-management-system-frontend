@@ -20,4 +20,14 @@ export class AdminReservationManagementFormGenerator {
       [ReservationManagementControlNames.VISIT_COUNT]: new FormControl(1, [Validators.required, Validators.min(1), Validators.max(20)])
     });
   }
+
+  public static generateSearchReservationFormGroup(): FormGroup {
+    return new FormGroup({
+      [ReservationManagementControlNames.DATE_FROM]: new FormControl((new Date()).toISOString(), Validators.required),
+      [ReservationManagementControlNames.DATE_TO]: new FormControl((new Date()).toISOString(), Validators.required),
+      [ReservationManagementControlNames.TIME_FROM]: new FormControl(null),
+      [ReservationManagementControlNames.TIME_TO]: new FormControl(null),
+      [ReservationManagementControlNames.RESERVATION_STATUS]: new FormControl('Dowolny', Validators.required)
+    });
+  }
 }

@@ -1,0 +1,46 @@
+<form class = "reservationForm" [formGroup]="searchFormGroup">
+  <mat-form-field appearance="fill" class="padding-width">
+    <mat-label>Data od</mat-label>
+    <input matInput [matDatepicker]="datePickerDateFrom" [formControlName]="reservationManagementControlNames.DATE_FROM">
+    <mat-datepicker-toggle matSuffix [for]="datePickerDateFrom"></mat-datepicker-toggle>
+    <mat-datepicker #datePickerDateFrom></mat-datepicker>
+    <mat-error *ngIf="searchFormGroup.controls[reservationManagementControlNames.DATE_FROM].hasError('required')">
+      Pole jest wymagane
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="padding-width">
+    <mat-label>Data do</mat-label>
+    <input matInput [matDatepicker]="datePickerDateTo" [formControlName]="reservationManagementControlNames.DATE_TO">
+    <mat-datepicker-toggle matSuffix [for]="datePickerDateTo"></mat-datepicker-toggle>
+    <mat-datepicker #datePickerDateTo></mat-datepicker>
+    <mat-error *ngIf="searchFormGroup.controls[reservationManagementControlNames.DATE_TO].hasError('required')">
+      Pole jest wymagane
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="padding-width">
+    <mat-label>Godzina rozpoczęcia</mat-label>
+    <input matInput [type]="'time'" [formControlName]="reservationManagementControlNames.TIME_FROM" placeholder="Godzina rozpoczęcia">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="padding-width">
+    <mat-label>Godzina zakończenia</mat-label>
+    <input matInput [type]="'time'" [formControlName]="reservationManagementControlNames.TIME_TO" placeholder="Godzina zakończenia">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="padding-width">
+    <mat-label>Czas trwania wizyty</mat-label>
+    <mat-select [formControlName]="reservationManagementControlNames.RESERVATION_STATUS" name="reservationStatus">
+      <mat-option *ngFor="let reservationStatus of reservationStatuses" [value]="reservationStatus">{{reservationStatus}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" class="styled-button padding-width" (click)="searchReservations()">Szukaj</button>
+</form>
+
+<app-reservation-table *ngIf="reservationList" [reservations]="reservationList"
+                                               [accessToRemove]="true"
+                                               [accessToDetails]="true"
+                                               (onDeleteItem)="searchReservations()"
+                                               (onDetailsClick)="onDetailsClicked($event)"></app-reservation-table>

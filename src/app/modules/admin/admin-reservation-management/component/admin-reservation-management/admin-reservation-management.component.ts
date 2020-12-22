@@ -59,6 +59,14 @@ export class AdminReservationManagementComponent implements OnInit {
     return formGroup.get(this.reservationManagementControlNames.DATE);
   }
 
+  fetchReservationListBySelectedTab() {
+    if (this.selectedTab.value === 0) {
+      this.fetchReservationList(this.getDateControl(this.singleReservationManagementFormGroup).value);
+    } else if (this.selectedTab.value === 1) {
+      this.fetchReservationList(this.getDateControl(this.cycleReservationManagementFormGroup).value);
+    }
+  }
+
   fetchReservationList(date: Date) {
     this._reservationApiService.fetchReservationsByDate(date).subscribe((response) => {
       this.reservationList = response;

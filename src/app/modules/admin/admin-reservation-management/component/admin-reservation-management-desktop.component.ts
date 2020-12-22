@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminReservationManagementApiService} from '../services/admin-reservation-management-api.service';
 import {ReservationApiService} from '../../../common/reservation/services/reservation-api-service';
-import {ReservationModel} from '../../../../objects/models/ReservationModel';
 import {FormGroup} from '@angular/forms';
 import {AdminReservationManagementFormGenerator} from '../utils/admin-reservation-management-form-generator';
 import {ReservationManagementControlNames} from '../utils/admin-reservation-management-consts';

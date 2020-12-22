@@ -11,8 +11,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {AccountManagementModule} from './account-management/account-management.module';
 import {AdminReservationManagementModule} from './modules/admin/admin-reservation-management/admin-reservation-management.module';
 import {AppContextService} from './context/app-context.service';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
+import {ReservationStatusesPipe} from './pipes/reservation-statuses.pipe';
 
 export let INTERNAL_MODULES = [
   WelcomePageModule,
@@ -31,15 +32,18 @@ export let EXTERNAL_MODULES = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     INTERNAL_MODULES,
     EXTERNAL_MODULES,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [AppContextService],
+  providers: [
+    AppContextService,
+    ReservationStatusesPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

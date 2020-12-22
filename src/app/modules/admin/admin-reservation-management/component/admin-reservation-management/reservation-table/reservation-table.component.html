@@ -1,1 +1,8 @@
-<p>reservation-table works!</p>
+<div class="reservationColumn" *ngFor="let date of listOfDates;">
+  <app-reservation-col [reservationByDate]="resolveReservationsByDate(date)"
+                       [accessToRemove]="accessToRemove"
+                       [accessToDetails]="accessToDetails"
+                       (onDeleteItem)="emitEventOnDeleteItem()"
+                       (onDetailsClick)="emitEventOnDetailClick($event)"
+  ></app-reservation-col>
+</div>

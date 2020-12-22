@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {ReservationModel} from '../../../../../../../objects/models/ReservationModel';
 import {ReservationStatus} from '../../../../../../../objects/models/ReservationStatus';
+import {AdminReservationManagementApiService} from '../../../../services/admin-reservation-management-api.service';
+import {EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-reservation-col',
@@ -12,33 +14,42 @@ export class ReservationColComponent implements OnInit {
   @Input('reservationByDate') reservationByDate: ReservationModel[];
   @Input('accessToDetails') accessToDetails: boolean = false;
   @Input('accessToRemove') accessToRemove: boolean = false;
+  @Output('onDeleteItem') onDeleteItemEventEmitter: EventEmitter<any> = new EventEmitter();
+  @Output('onDetailsClick') onDetailsClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
   reservationStatuses = ReservationStatus;
 
-  constructor() { }
+  constructor(private _reservationApiService: AdminReservationManagementApiService) {
+  }
 
   ngOnInit(): void {
   }
 
   removeReservation(value) {
-    //todo reservation to remove;
+    this._reservationApiService.deleteReservation(value.id).subscribe(() => {
+      this.onDeleteItemEventEmitter.emit(value.id);
+    });
+  }
+
+  detailsClicked(reservation: ReservationModel) {
+    this.onDetailsClickEventEmitter.emit(reservation);
   }
 
   getClassName(reservation: ReservationModel) {
-    switch(reservation.status) {
+    switch (reservation.status) {
       case ReservationStatus.RESERVED: {
-        return "reserved";
+        return 'reserved';
       }
       case ReservationStatus.AVAILABLE: {
-        return "available"
+        return 'available';
       }
       case ReservationStatus.CANCELED: {
-        return "canceled"
+        return 'canceled';
       }
       case ReservationStatus.CLOSED: {
-        return "closed"
+        return 'closed';
       }
       default: {
-        return "";
+        return '';
       }
     }
   }

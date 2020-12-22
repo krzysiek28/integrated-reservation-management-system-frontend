@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {AppConsts} from '../../../../root/app-consts';
 import {ReservationModel} from '../../../../objects/models/ReservationModel';
 import {Observable} from 'rxjs';
+import {ReservationSearchRequest} from '../objects/ReservationSearchRequest';
 
 @Injectable()
 export class AdminReservationManagementApiService {
@@ -24,5 +25,17 @@ export class AdminReservationManagementApiService {
   public fetchReservationsByDate(date: Date): Observable<ReservationModel[]> {
     let params = new HttpParams().set('date', new Date(date).toDateString());
     return this.http.get<ReservationModel[]>(this._url + '/reservationsByDate', {params: params});
+  }
+
+  public searchReservations(reservationsSearchRequest: ReservationSearchRequest): Observable<ReservationModel[]> {
+    return this.http.post<ReservationModel[]>(this._url + '/searchReservations', reservationsSearchRequest);
+  }
+
+  public deleteReservation(id: number): Observable<number> {
+    return this.http.delete<number>(this._url + '/reservation/' + id);
+  }
+
+  public fetchClosedReservations(): Observable<ReservationModel[]> {
+    return this.http.get<ReservationModel[]>(this._url + '/getClosedReservations');
   }
 }

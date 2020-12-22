@@ -2,13 +2,13 @@
   <h1 class="align-center"> Data: {{reservationByDate[0].date | date: 'shortDate'}}</h1>
   <div *ngFor="let reservation of reservationByDate;">
     <mat-toolbar-row [ngClass]="getClassName(reservation)" class="row">
-      <span>Godzina rozpoczęcia {{reservation.timeFrom }}</span>
+      <span>Od {{reservation.timeFrom }}</span>
       <span class="spacer"></span>
-      <span>Godzina zakończenia {{reservation.timeTo }}</span>
+      <span>Do {{reservation.timeTo }}</span>
       <span class="spacer"></span>
-      <button *ngIf="reservation.status === reservationStatuses.AVAILABLE" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (submit)="removeReservation($event)">
-        <mat-icon>delete</mat-icon>
-      </button>
+      <span> {{reservation.status | transformReservationStatus}}</span>
+      <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.AVAILABLE && accessToRemove" (click)="removeReservation(reservation)">delete</mat-icon>
+      <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails" (click)="detailsClicked(reservation)">description</mat-icon>
     </mat-toolbar-row>
   </div>
 </mat-toolbar>

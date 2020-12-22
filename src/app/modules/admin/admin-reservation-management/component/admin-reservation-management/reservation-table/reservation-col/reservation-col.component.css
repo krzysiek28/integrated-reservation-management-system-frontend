@@ -18,20 +18,23 @@
 }
 
 .reserved {
-  display: block;
-  background-color: #902c2b;
+  background-color: #c4736b;
 }
 
 .available {
-display: block;
-  background-color: #4e905f;
+  background-color: #76cb77;
 }
 
 .canceled {
-  background-color: #eebc1a;
+  background-color: #cab24a;
 }
 
 .closed {
-  background-color: #2b4790;
+  background-color: #7579c0;
+}
+
+.clickable-icon {
+  cursor: pointer;
+  margin-left:auto; margin-right:0;
 }
 

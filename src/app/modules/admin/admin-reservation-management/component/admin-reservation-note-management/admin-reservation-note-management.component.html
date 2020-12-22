@@ -1,0 +1,5 @@
+<app-reservation-table *ngIf="closedReservations" [reservations]="closedReservations"
+                       [accessToRemove]="false"
+                       [accessToDetails]="true"
+                       (onDetailsClick)="onDetailsClicked($event)"
+></app-reservation-table>

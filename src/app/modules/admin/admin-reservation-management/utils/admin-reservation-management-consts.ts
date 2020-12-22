@@ -5,13 +5,16 @@ export class AdminReservationManagementConsts {
 export class ReservationManagementControlNames {
   public static COST: string = 'cost';
   public static NOTE: string = 'note';
-  public static VISIT_STATUS: string = 'status';
+  public static VISIT_STATUS: string = 'visitStatus';
+  public static DATE_FROM: string = 'dateFrom';
+  public static DATE_TO: string = 'dateTo';
   public static DATE: string = 'date';
   public static TIME_FROM: string = 'timeFrom';
   public static TIME_TO: string = 'timeTo';
   public static VISIT_DURATION: string = 'visitDuration';
   public static BREAK_DURATION: string = 'breakDuration';
   public static VISIT_COUNT: string = 'visitCount';
+  public static RESERVATION_STATUS: string = 'reservationStatus';
 }
 
 export class ReservationTimeStates {
