@@ -18,7 +18,7 @@ export class AdminReservationManagementApiService {
     return this.http.post<ReservationModel>(this._url + '/reservation', reservation);
   }
 
-  public addReservations(reservations: Array<ReservationModel>) {
+  public addReservations(reservations: Array<ReservationModel>): Observable<ReservationModel[]>  {
     return this.http.post<Array<ReservationModel>>(this._url + '/reservations', reservations);
   }
 
@@ -36,6 +36,6 @@ export class AdminReservationManagementApiService {
   }
 
   public fetchClosedReservations(): Observable<ReservationModel[]> {
-    return this.http.get<ReservationModel[]>(this._url + '/getClosedReservations');
+    return this.http.get<ReservationModel[]>(this._url + '/getClosedReservationsForLastMonth');
   }
 }

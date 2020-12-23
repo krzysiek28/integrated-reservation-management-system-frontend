@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {LoggedUserModel} from '../objects/LoggedUserModel';
-import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';

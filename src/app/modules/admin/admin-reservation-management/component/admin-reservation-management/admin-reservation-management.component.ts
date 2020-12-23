@@ -114,7 +114,7 @@ export class AdminReservationManagementComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (isNotNullOrUndefined(result)) {
         this._reservationApiService.addReservations(result).subscribe(() => {
-          this.fetchReservationList(result.date);
+          this.fetchReservationList(result[0]?.date);
         }, error => console.log('error occured: ', error));
       }
     });

@@ -3,16 +3,18 @@ import {WelcomePageDesktopComponent} from './component/welcome-page-desktop.comp
 import {FormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {CommonModule} from '@angular/common';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     WelcomePageDesktopComponent
   ],
-  imports: [
-    FormsModule,
-    MatTableModule,
-    CommonModule,
-  ],
+    imports: [
+        FormsModule,
+        MatTableModule,
+        CommonModule,
+        MatCardModule,
+    ],
   providers: [
   ]
 })

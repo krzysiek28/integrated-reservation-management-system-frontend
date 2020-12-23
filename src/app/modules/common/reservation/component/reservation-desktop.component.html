@@ -1,4 +1,28 @@
 <div class="content" role="main">
+
+  <mat-tab-group *ngIf="isUserLogged" mat-align-tabs="center" animationDuration="0ms" [selectedIndex]="selectedTab.value"
+                 (selectedIndexChange)="selectedTab.setValue($event)">
+    <mat-tab label="Rezerwuj wizyte">
+
+    </mat-tab>
+
+    <mat-tab label="Przeglądaj odbyte wizyty">
+
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--
+
   <h1>Reservation page body</h1>
 
   <mat-form-field appearance="fill">
@@ -20,3 +44,4 @@
   <button class="card card-small" (click)="searchReservations()">Szukaj terminu</button>
 
 </div>
+-->

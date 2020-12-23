@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ReservationFormGenerator} from '../utils/reservation-form-generator';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {ReservationControlNames} from '../utils/reservation-consts';
+import {AppContextService} from '../../../../context/app-context.service';
 
 @Component({
   selector: 'app-reservation-desktop',
@@ -13,7 +14,11 @@ export class ReservationDesktopComponent implements OnInit {
   formGroup: FormGroup;
   reservationControlNames = ReservationControlNames;
 
-  constructor() {
+  isUserLogged: boolean = false;
+  selectedTab = new FormControl(0);
+
+  constructor(private _appContext: AppContextService) {
+    this.isUserLogged = _appContext.isLoggedAsUser();
     this.formGroup = ReservationFormGenerator.generateFormGroup();
   }
 

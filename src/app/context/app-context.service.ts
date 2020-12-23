@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {AppContext} from './AppContext';
 import {ApplicationVariant} from '../root/app-consts';
 import {TokenStorageService} from '../account-management/services/token-storage.service';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
@@ -8,29 +7,29 @@ import {LoggedUserModel} from '../account-management/objects/LoggedUserModel';
 @Injectable()
 export class AppContextService {
 
-  private _appContext: AppContext;
-
   constructor(private _tokenStorageService: TokenStorageService) {
   }
 
-  get appContext(): AppContext {
-    return this._appContext;
-  }
-
-  set appContext(appContext: AppContext) {
-    this._appContext = appContext;
+  get applicationVariant(): ApplicationVariant {
+    if (this._tokenStorageService.getUser()?.role === 'ROLE_USER') {
+      return ApplicationVariant.LOGGED_AS_USER;
+    } else if (this._tokenStorageService.getUser()?.role === 'ROLE_ADMIN') {
+      return ApplicationVariant.LOGGED_AS_ADMIN;
+    } else {
+      return ApplicationVariant.NO_CONTEXT;
+    }
   }
 
   public isNoContext(): boolean {
-    return ApplicationVariant.NO_CONTEXT === this.appContext.applicationVariant;
+    return ApplicationVariant.NO_CONTEXT === this.applicationVariant;
   }
 
   public isLoggedAsAdmin(): boolean {
-    return ApplicationVariant.LOGGED_AS_ADMIN === this.appContext.applicationVariant;
+    return ApplicationVariant.LOGGED_AS_ADMIN === this.applicationVariant;
   }
 
   public isLoggedAsUser(): boolean {
-    return ApplicationVariant.LOGGED_AS_USER === this.appContext.applicationVariant;
+    return ApplicationVariant.LOGGED_AS_USER === this.applicationVariant;
   }
 
   public hasUserContext(): boolean {
