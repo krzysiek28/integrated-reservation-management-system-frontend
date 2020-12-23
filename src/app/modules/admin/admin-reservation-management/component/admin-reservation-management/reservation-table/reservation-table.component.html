@@ -2,7 +2,9 @@
   <app-reservation-col [reservationByDate]="resolveReservationsByDate(date)"
                        [accessToRemove]="accessToRemove"
                        [accessToDetails]="accessToDetails"
+                       [accessToReservation]="accessToReservation"
                        (onDeleteItem)="emitEventOnDeleteItem()"
                        (onDetailsClick)="emitEventOnDetailClick($event)"
+                       (onReservationClick)="emitEventOnReservationClicked($event)"
   ></app-reservation-col>
 </div>

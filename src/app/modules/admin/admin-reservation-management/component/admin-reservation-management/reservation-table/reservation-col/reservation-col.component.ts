@@ -16,8 +16,10 @@ export class ReservationColComponent implements OnInit {
   @Input('reservationByDate') reservationByDate: ReservationModel[];
   @Input('accessToDetails') accessToDetails: boolean = false;
   @Input('accessToRemove') accessToRemove: boolean = false;
+  @Input('accessToReservation') accessToReservation: boolean = false;
   @Output('onDeleteItem') onDeleteItemEventEmitter: EventEmitter<any> = new EventEmitter();
   @Output('onDetailsClick') onDetailsClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
+  @Output('onReservationClick') onReservationClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
   reservationStatuses = ReservationStatus;
 
   constructor(private _reservationApiService: AdminReservationManagementApiService,
@@ -44,6 +46,10 @@ export class ReservationColComponent implements OnInit {
 
   detailsClicked(reservation: ReservationModel) {
     this.onDetailsClickEventEmitter.emit(reservation);
+  }
+
+  reservationClicked(reservation: ReservationModel) {
+    this.onReservationClickEventEmitter.emit(reservation);
   }
 
   getClassName(reservation: ReservationModel) {

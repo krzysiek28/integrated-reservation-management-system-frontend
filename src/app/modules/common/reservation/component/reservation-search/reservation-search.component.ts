@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormGroup} from '@angular/forms';
-import {ReservationManagementControlNames} from '../../../../admin/admin-reservation-management/utils/admin-reservation-management-consts';
 import {ReservationModel} from '../../../../../objects/models/ReservationModel';
-import {ReservationSearchRequest} from '../../../../admin/admin-reservation-management/objects/ReservationSearchRequest';
 import {ReservationFormGenerator} from '../../utils/reservation-form-generator';
 import {ReservationControlNames} from '../../utils/reservation-consts';
 import {DateUtil} from '../../../../../utils/date-util';
 import {ReservationApiService} from '../../services/reservation-api-service';
+import {ConfirmationPopup} from '../../../../../utils/confirmation-popup/confirmation-popup';
+import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
   selector: 'app-reservation-search',
@@ -19,12 +21,14 @@ export class ReservationSearchComponent implements OnInit {
   reservationControlNames = ReservationControlNames;
   reservationList: ReservationModel[];
 
-  constructor(private _reservationApi: ReservationApiService) {
+  constructor(private _reservationApi: ReservationApiService,
+              private _dialog: MatDialog,
+              private _router: Router) {
   }
 
   ngOnInit(): void {
     this.searchFormGroup = ReservationFormGenerator.generateSearchReservationFormGroup();
-    this.searchReservations()
+    this.searchReservations();
   }
 
   searchReservations() {
@@ -53,5 +57,22 @@ export class ReservationSearchComponent implements OnInit {
 
   getDateToControl() {
     return this.searchFormGroup.get(this.reservationControlNames.DATE_TO);
+  }
+
+  onReservationClick(reservation: ReservationModel) {
+    const dialogRef = this._dialog.open(ConfirmationPopup, {
+      width: '700px',
+      data: `Czy chcesz zarezerwować wizyte dnia ${new Date(reservation?.date).toLocaleDateString()} na godzine ${reservation?.timeFrom}?`
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (isNotNullOrUndefined(result)) {
+        this.showReservationProcess(reservation.id);
+      }
+    });
+  }
+
+  showReservationProcess(reservationId: number) {
+    this._router.navigate(['/reservation-process'], {queryParams: {'reservationId': reservationId}});
   }
 }

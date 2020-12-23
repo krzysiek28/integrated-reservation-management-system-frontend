@@ -1,0 +1,69 @@
+<div class="content" role="main">
+
+  <div class="reservation-bar">
+    <div [ngClass]="'available'" class="row">
+      <span class="spacer"></span>
+      <span><strong> Data: {{reservationModel.date | date: 'shortDate' }} </strong> </span>
+      <span class="spacer"></span>
+      <span><strong> Godzina rozpoczęcia: {{reservationModel.timeFrom }} </strong> </span>
+      <span class="spacer"></span>
+      <span><strong> Godzina zakończenia {{reservationModel.timeTo }} </strong> </span>
+      <span class="spacer"></span>
+      <span><strong> Status {{reservationModel.status | transformReservationStatus}} </strong> </span>
+    </div>
+  </div>
+
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="reservationInformationFormGroup">
+      <form [formGroup]="reservationInformationFormGroup">
+        <ng-template matStepLabel>Uzupełnij dane</ng-template>
+        <mat-form-field class="reservation-form-input display-inline">
+          <mat-label>Imię</mat-label>
+          <input matInput placeholder="Imię" [formControlName]="reservationControlNames.FIRST_NAME" required>
+        </mat-form-field>
+        <mat-form-field class="reservation-form-input display-inline">
+          <mat-label>Nazwisko</mat-label>
+          <input matInput placeholder="Nazwisko" [formControlName]="reservationControlNames.LAST_NAME" required>
+        </mat-form-field>
+        <mat-form-field class="reservation-form-input display-inline">
+          <mat-label>Numer telefonu</mat-label>
+          <input matInput placeholder="Numer telefonu" [formControlName]="reservationControlNames.PHONE_NUMBER" required>
+        </mat-form-field>
+        <mat-form-field class="reservation-form-input display-inline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" [formControlName]="reservationControlNames.EMAIL">
+        </mat-form-field>
+        <mat-form-field class="reservation-form-textarea">
+          <mat-label>Komentarz do wizyty</mat-label>
+          <textarea matInput placeholder="Komentarz do wizyty" [formControlName]="reservationControlNames.COMMENT"></textarea>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" class="form-button" (click)="onBack()">Powrót</button>
+          <button mat-raised-button color="primary" class="form-button float-right" matStepperNext (click)="makeReservation()">Rezerwuj</button>
+        </div>
+      </form>
+    </mat-step>
+    <!--<mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>-->
+    <mat-step>
+      <ng-template matStepLabel>Gotowe</ng-template>
+      <p>Zarezerwowano wizyte!</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>

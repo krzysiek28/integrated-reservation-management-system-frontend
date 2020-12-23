@@ -17,6 +17,10 @@ export class ReservationApiService {
     return this.http.delete<number>(this._url + '/reservation/' + reservationId);
   }
 
+  public getReservation(id: number): Observable<ReservationModel> {
+    return this.http.get<ReservationModel>(this._url + '/reservation/' + id);
+  }
+
   public findAvailableReservationsByDateRange(startDate: Date, endDate: Date): Observable<ReservationModel[]> {
     let params = new HttpParams()
       .set('startDate', startDate.toDateString())

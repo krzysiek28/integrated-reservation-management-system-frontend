@@ -1,7 +1,7 @@
-<form class = "reservationForm" [formGroup]="searchFormGroup">
+<form class="reservationForm" [formGroup]="searchFormGroup">
   <mat-icon class="clickable-icon" (click)="previous()">keyboard_arrow_left</mat-icon>
   <mat-form-field appearance="fill">
-    <mat-label>Wprowadź zakres dat</mat-label>
+    <mat-label>Data wizyty</mat-label>
     <mat-date-range-input [formGroup]="searchFormGroup" [disabled]="true">
       <input matStartDate formControlName="dateFrom" placeholder="Data od">
       <input matEndDate formControlName="dateTo" placeholder="Data do">
@@ -10,4 +10,7 @@
   <mat-icon class="clickable-icon" (click)="next()">keyboard_arrow_right</mat-icon>
 </form>
 
-<app-reservation-table *ngIf="reservationList" [reservations]="reservationList"></app-reservation-table>
+<app-reservation-table *ngIf="reservationList" [reservations]="reservationList"
+                       [accessToReservation]="true"
+                       (onReservationClick)="onReservationClick($event)">
+</app-reservation-table>

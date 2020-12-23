@@ -5,13 +5,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
-import { ReservationSearchComponent } from './component/reservation-search/reservation-search.component';
-import { OldReservationsOverviewComponent } from './component/old-reservations-overview/old-reservations-overview.component';
+import {ReservationSearchComponent} from './component/reservation-search/reservation-search.component';
+import {OldReservationsOverviewComponent} from './component/old-reservations-overview/old-reservations-overview.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {AdminReservationManagementModule} from '../../admin/admin-reservation-management/admin-reservation-management.module';
+import {ReservationProcessComponent} from './component/reservation-process/reservation-process.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   imports: [
@@ -26,12 +28,14 @@ import {AdminReservationManagementModule} from '../../admin/admin-reservation-ma
     MatTabsModule,
     MatIconModule,
     AdminReservationManagementModule,
+    MatStepperModule,
   ],
-    declarations: [
-        ReservationDesktopComponent,
-        ReservationSearchComponent,
-        OldReservationsOverviewComponent
-    ]
+  declarations: [
+    ReservationDesktopComponent,
+    ReservationSearchComponent,
+    OldReservationsOverviewComponent,
+    ReservationProcessComponent
+  ]
 })
 export class ReservationModule {
 }

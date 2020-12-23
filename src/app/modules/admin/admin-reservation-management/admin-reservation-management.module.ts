@@ -56,9 +56,10 @@ import { AdminReservationNoteDialog } from './component/admin-reservation-note-m
     AdminReservationNoteManagementComponent,
     AdminReservationNoteDialog
   ],
-  exports: [
-    ReservationTableComponent
-  ],
+    exports: [
+        ReservationTableComponent,
+        ReservationStatusesPipe
+    ],
   providers: [
     AdminReservationManagementApiService,
     ReservationApiService

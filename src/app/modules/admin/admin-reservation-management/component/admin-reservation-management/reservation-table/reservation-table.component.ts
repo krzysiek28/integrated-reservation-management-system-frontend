@@ -11,8 +11,10 @@ export class ReservationTableComponent implements OnInit {
 
   @Input('accessToDetails') accessToDetails: boolean = false;
   @Input('accessToRemove') accessToRemove: boolean = false;
+  @Input('accessToReservation') accessToReservation: boolean = false;
   @Output('onDeleteItem') onDeleteItemEventEmitter: EventEmitter<any> = new EventEmitter();
   @Output('onDetailsClick') onDetailsClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
+  @Output('onReservationClick') onReservationClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
 
   _reservations: ReservationModel[];
   listOfDates: Date[] = new Array();
@@ -67,5 +69,9 @@ export class ReservationTableComponent implements OnInit {
 
   emitEventOnDetailClick(event) {
     this.onDetailsClickEventEmitter.emit(event);
+  }
+
+  emitEventOnReservationClicked(event) {
+    this.onReservationClickEventEmitter.emit(event);
   }
 }
