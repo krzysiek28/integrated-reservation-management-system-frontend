@@ -14,6 +14,8 @@ import {AppContextService} from './context/app-context.service';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {ReservationStatusesPipe} from './pipes/reservation-statuses.pipe';
+import { ConfirmationPopup } from './utils/confirmation-popup/confirmation-popup';
+import {MatDialogModule} from '@angular/material/dialog';
 
 export let INTERNAL_MODULES = [
   WelcomePageModule,
@@ -33,12 +35,14 @@ export let EXTERNAL_MODULES = [
 @NgModule({
   declarations: [
     AppComponent,
+    ConfirmationPopup,
   ],
   imports: [
     INTERNAL_MODULES,
     EXTERNAL_MODULES,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    MatDialogModule
   ],
   providers: [
     AppContextService,

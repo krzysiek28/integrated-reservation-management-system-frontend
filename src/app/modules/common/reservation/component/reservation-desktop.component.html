@@ -3,13 +3,16 @@
   <mat-tab-group *ngIf="isUserLogged" mat-align-tabs="center" animationDuration="0ms" [selectedIndex]="selectedTab.value"
                  (selectedIndexChange)="selectedTab.setValue($event)">
     <mat-tab label="Rezerwuj wizyte">
-
+      <app-reservation-search></app-reservation-search>
     </mat-tab>
-
     <mat-tab label="Przeglądaj odbyte wizyty">
 
     </mat-tab>
   </mat-tab-group>
+
+  <div *ngIf="!isUserLogged" class="no-logged-users">
+    <app-reservation-search></app-reservation-search>
+  </div>
 </div>
 
 

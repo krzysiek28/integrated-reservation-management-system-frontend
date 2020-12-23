@@ -1,0 +1,11 @@
+.reservationForm {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clickable-icon {
+  cursor: pointer;
+  padding: 10px;
+}

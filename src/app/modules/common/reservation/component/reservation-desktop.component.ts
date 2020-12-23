@@ -19,7 +19,7 @@ export class ReservationDesktopComponent implements OnInit {
 
   constructor(private _appContext: AppContextService) {
     this.isUserLogged = _appContext.isLoggedAsUser();
-    this.formGroup = ReservationFormGenerator.generateFormGroup();
+    // this.formGroup = ReservationFormGenerator.generateFormGroup();
   }
 
   ngOnInit(): void {
