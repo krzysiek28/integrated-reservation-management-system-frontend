@@ -3,6 +3,7 @@ export class AppConsts {
   public static RESERVATION_API_PATH = '/reservationsApi';
   public static ADMIN_RESERVATION_MANAGEMENT_API_PATH = '/adminReservationsApi';
   public static AUTH_API = '/authApi';
+  public static USER_API = '/usersApi';
 }
 
 export enum ApplicationVariant {

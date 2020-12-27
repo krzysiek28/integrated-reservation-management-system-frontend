@@ -1,0 +1,27 @@
+<div *ngIf="personalDataModel" class="content">
+  <h1 mat-dialog-title>Edytuj dane kontaktowe</h1>
+  <div mat-dialog-content>
+    <form class = "personal-data-form" [formGroup]="personalDataFormGroup">
+      <mat-form-field appearance="fill" class="padding-width">
+        <mat-label>Imię</mat-label>
+        <input matInput [type]="'text'" [formControlName]="profileControlNames.FIRST_NAME" placeholder="Imię">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="padding-width">
+        <mat-label>Nazwisko</mat-label>
+        <input matInput [type]="'text'" [formControlName]="profileControlNames.LAST_NAME" placeholder="Nazwisko">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="padding-width">
+        <mat-label>Numer telefonu</mat-label>
+        <input matInput [type]="'text'" [formControlName]="profileControlNames.PHONE_NUMBER" placeholder="Numer telefonu">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="padding-width">
+        <mat-label>Email kontaktowy</mat-label>
+        <input matInput [type]="'text'" [formControlName]="profileControlNames.CONTACT_EMAIL" placeholder="Email kontaktowy">
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Anuluj</button>
+    <button mat-button [mat-dialog-close]="personalDataFormGroup.getRawValue()" cdkFocusInitial>Aktualizuj</button>
+  </div>
+</div>

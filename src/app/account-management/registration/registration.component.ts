@@ -6,6 +6,12 @@ import {AccountManagementControlNames} from '../utils/account-management-consts'
 import {LoginRequest} from '../objects/LoginRequest';
 import {TokenStorageService} from '../services/token-storage.service';
 import {Router} from '@angular/router';
+import {ProfileEditPersonalDataDialog} from '../profile/component/profile-edit-personal-data-dialog/profile-edit-personal-data-dialog';
+import {PersonalDataModel} from '../../objects/models/PersonalDataModel';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
+import {MatDialog} from '@angular/material/dialog';
+import {ProfileAddPersonalDataDialog} from './profile-add-personal-data-dialog/profile-add-personal-data-dialog';
+import {UserApiService} from '../profile/services/user-api-service';
 
 @Component({
   selector: 'app-registration',
@@ -26,7 +32,9 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private _router: Router,
               private _authService: AuthService,
-              private _tokenStorage: TokenStorageService) {
+              private _tokenStorage: TokenStorageService,
+              private _dialog: MatDialog,
+              private _userApi: UserApiService) {
     this.registrationFormGroup = AccountManagementFormGenerator.generateRegisterFormGroup();
   }
 
@@ -69,7 +77,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   logInToApp() {
-    this._authService.login(<LoginRequest>{
+    this._authService.login(<LoginRequest> {
       userName: this.registrationFormGroup.get(this.accountControlNames.USERNAME).value,
       password: this.registrationFormGroup.get(this.accountControlNames.PASSWORD).value
     }).subscribe(
@@ -78,12 +86,30 @@ export class RegistrationComponent implements OnInit {
         this._tokenStorage.saveUser(data);
 
         this.isLoggedIn = true;
-        this.reloadPage();
+
+        this.openAddPersonalDataDialog(data.id);
       },
       () => {
         this.goToLoginPage();
       }
     );
+  }
+
+  openAddPersonalDataDialog(userId: number): void {
+    const dialogRef = this._dialog.open(ProfileAddPersonalDataDialog, {
+      width: '500px',
+      data: new PersonalDataModel()
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(isNotNullOrUndefined(result)){
+        this._userApi.updateUserPersonalData(userId, result).subscribe(() => {
+          this.reloadPage();
+        }, error => console.log('error occured: ', error));
+      } else {
+        this.reloadPage();
+      }
+    });
   }
 
   goToLoginPage() {

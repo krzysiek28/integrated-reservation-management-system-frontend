@@ -1,0 +1,10 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.padding-width {
+  padding-left: 10px;
+  padding-right: 10px;
+}

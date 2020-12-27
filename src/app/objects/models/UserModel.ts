@@ -2,9 +2,9 @@ import {PersonalDataModel} from './PersonalDataModel';
 
 export class UserModel {
    id: number;
-   login: String;
-   password: String;
+   login: string;
    personalData: PersonalDataModel;
-   role: String;
+   role: string;
    enabled: Boolean;
+   email: string;
 }

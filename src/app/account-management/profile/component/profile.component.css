@@ -6,3 +6,43 @@
   flex-direction: column;
   align-items: center;
 }
+
+.profile-img-card {
+  display: inline-block;
+}
+
+.mat-card {
+  background-color: #f7f7f7;
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 50px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 4px;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  width: 600px;
+}
+
+.mat-card-content {
+  padding: 40px 40px;
+}
+
+.personal-data-row {
+  display: flex;
+}
+
+.profile-column {
+  display: flex;
+}
+
+.personal-data-column {
+  padding-left: 40px;
+  margin: auto;
+  /*padding-right: 200px;*/
+}
+
+.clickable-icon {
+  cursor: pointer;
+}

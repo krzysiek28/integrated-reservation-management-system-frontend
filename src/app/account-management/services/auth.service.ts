@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppConsts} from '../../root/app-consts';
 import {RegistrationRequest} from '../objects/RegistrationRequest';
 import {LoginRequest} from '../objects/LoginRequest';
-import {ReservationModel} from '../../objects/models/ReservationModel';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

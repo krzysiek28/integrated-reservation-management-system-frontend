@@ -1,23 +1,28 @@
 <div class="content" role="main">
 
-  <div class="container" *ngIf="userModel; else loggedOut">
-    <strong>{{ userModel.userName }}</strong> Profile
-    <p>
-      <strong>Token:</strong>
-      {{ userModel.token.substring(0, 20) }} ...
-      {{ userModel.token.substr(userModel.token.length - 20) }}
-    </p>
-    <p>
-      <strong>Email:</strong>
-      {{ userModel.email }}
-    </p>
-    <strong>Roles:</strong>
-    {{ userModel.role }}
-  </div>
+  <div class="container" *ngIf="loggedUserModel; else loggedOut">
+    <mat-card>
+      <mat-card-content>
+        <div class="profile-column">
+          <img mat-card-lg-image
+               id="profile-img"
+               src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+               class="profile-img-card"
+          />
+          <div class="personal-data-column">
+<!--            <span class="personal-data-row"> Id: {{userModel?.personalData?.id}}</span>-->
+            <span class="personal-data-row"> Imię: {{userModel?.personalData?.firstName}}</span>
+            <span class="personal-data-row"> Nazwisko: {{userModel?.personalData?.lastName}}</span>
+            <span class="personal-data-row"> Numer telefonu: {{userModel?.personalData?.phoneNumber}}</span>
+            <span class="personal-data-row"> Email kontaktowy: {{userModel?.personalData?.contactEmail}}</span>
+          </div>
+          <mat-icon class="clickable-icon" (click)="openEditPersonalDataDialog()">edit</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
+  </div>
   <ng-template #loggedOut>
     Please login.
   </ng-template>
-<p>profile-desktop works!</p>
-
 </div>

@@ -14,12 +14,17 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {ProfileComponent} from './profile/component/profile.component';
+import { ProfileEditPersonalDataDialog } from './profile/component/profile-edit-personal-data-dialog/profile-edit-personal-data-dialog';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ProfileAddPersonalDataDialog } from './registration/profile-add-personal-data-dialog/profile-add-personal-data-dialog';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileEditPersonalDataDialog,
+    ProfileAddPersonalDataDialog
   ],
   imports: [
     CommonModule,
@@ -31,6 +36,7 @@ import {ProfileComponent} from './profile/component/profile.component';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   providers: [
     AuthService,
