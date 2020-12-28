@@ -1,7 +1,7 @@
 <div class="content" role="main">
 
   <div class="reservation-bar">
-    <div [ngClass]="'available'" class="row">
+    <div *ngIf="reservationModel" [ngClass]="getClassName(reservationModel)" class="row">
       <span class="spacer"></span>
       <span><strong> Data: {{reservationModel.date | date: 'shortDate' }} </strong> </span>
       <span class="spacer"></span>
@@ -15,7 +15,7 @@
 
   <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="reservationInformationFormGroup">
-      <form [formGroup]="reservationInformationFormGroup">
+      <form *ngIf="reservationInformationFormGroup" [formGroup]="reservationInformationFormGroup">
         <ng-template matStepLabel>Uzupełnij dane</ng-template>
         <mat-form-field class="reservation-form-input display-inline">
           <mat-label>Imię</mat-label>
@@ -59,6 +59,21 @@
     <mat-step>
       <ng-template matStepLabel>Gotowe</ng-template>
       <p>Zarezerwowano wizyte!</p>
+      <p>Id: {{reservationModel.id}}</p>
+      <p>Data: {{reservationModel.date}}</p>
+      <p>Godzina od: {{reservationModel.timeFrom}}</p>
+      <p>Godzina do: {{reservationModel.timeTo}}</p>
+      <p>Status: {{reservationModel.status}}</p>
+      <p>Komentarz: {{reservationModel.comment}}</p>
+      <p>Dane kontaktowe id: {{reservationModel?.personalData?.id}}</p>
+      <p>Dane kontaktowe Imie: {{reservationModel?.personalData?.firstName}}</p>
+      <p>Dane kontaktowe Nazwisko: {{reservationModel?.personalData?.lastName}}</p>
+      <p>Dane kontaktowe telefon kontaktowy: {{reservationModel?.personalData?.phoneNumber}}</p>
+      <p>Dane kontaktowe email: {{reservationModel?.personalData?.contactEmail}}</p>
+      <p>Użytkownik id: {{reservationModel?.user?.id}}</p>
+      <p>Użytkownik email: {{reservationModel?.user?.email}}</p>
+      <p>Użytkownik login: {{reservationModel?.user?.login}}</p>
+      <p>Użytkownik rola: {{reservationModel?.user?.role}}</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>

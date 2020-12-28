@@ -3,6 +3,8 @@ import {AppConsts} from '../../../../root/app-consts';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ReservationModel} from '../../../../objects/models/ReservationModel';
 import {Observable} from 'rxjs';
+import {PersonalDataModel} from '../../../../objects/models/PersonalDataModel';
+import {ReserveRequest} from '../objects/ReserveRequest';
 
 @Injectable()
 export class ReservationApiService {
@@ -19,6 +21,10 @@ export class ReservationApiService {
 
   public getReservation(id: number): Observable<ReservationModel> {
     return this.http.get<ReservationModel>(this._url + '/reservation/' + id);
+  }
+
+  public reserve(reservationId: number, reserveRequest: ReserveRequest): Observable<ReservationModel> {
+    return this.http.put<ReservationModel>(this._url + '/reserve/' + reservationId, reserveRequest);
   }
 
   public findAvailableReservationsByDateRange(startDate: Date, endDate: Date): Observable<ReservationModel[]> {

@@ -49,6 +49,10 @@
 }
 
 .available {
+  background-color: #cab24a;
+}
+
+.reserved {
   background-color: #76cb77;
 }
 

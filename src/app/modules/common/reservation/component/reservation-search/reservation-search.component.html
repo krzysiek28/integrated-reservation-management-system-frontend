@@ -14,3 +14,7 @@
                        [accessToReservation]="true"
                        (onReservationClick)="onReservationClick($event)">
 </app-reservation-table>
+
+<div *ngIf="reservationList?.length === 0" class="no-result-info">
+  <h3>Nie znaleziono dostępnych wizyt w danym przedziale dat</h3>
+</div>

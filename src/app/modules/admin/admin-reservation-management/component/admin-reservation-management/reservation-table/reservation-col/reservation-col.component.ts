@@ -5,6 +5,7 @@ import {AdminReservationManagementApiService} from '../../../../services/admin-r
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmationPopup} from '../../../../../../../utils/confirmation-popup/confirmation-popup';
+import {ReservationUtils} from '../../../../../../../utils/ReservationUtils';
 
 @Component({
   selector: 'app-reservation-col',
@@ -32,7 +33,7 @@ export class ReservationColComponent implements OnInit {
   removeReservation(value) {
     const dialogRef = this._dialog.open(ConfirmationPopup, {
       width: '400px',
-      data: "Czy na pewno chcesz usunąć termin wizyty?"
+      data: 'Czy na pewno chcesz usunąć termin wizyty?'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -53,22 +54,6 @@ export class ReservationColComponent implements OnInit {
   }
 
   getClassName(reservation: ReservationModel) {
-    switch (reservation.status) {
-      case ReservationStatus.RESERVED: {
-        return 'reserved';
-      }
-      case ReservationStatus.AVAILABLE: {
-        return 'available';
-      }
-      case ReservationStatus.CANCELED: {
-        return 'canceled';
-      }
-      case ReservationStatus.CLOSED: {
-        return 'closed';
-      }
-      default: {
-        return '';
-      }
-    }
+    return ReservationUtils.getClassName(reservation);
   }
 }
