@@ -26,6 +26,9 @@ import { AdminReservationOverviewComponent } from './component/admin-reservation
 import { AdminReservationNoteManagementComponent } from './component/admin-reservation-note-management/admin-reservation-note-management.component';
 import { AdminReservationNoteDialog } from './component/admin-reservation-note-management/admin-reservation-note-dialog/admin-reservation-note-dialog';
 import { ContactInfoDialog } from './component/admin-reservation-overview/contact-info-dialog/contact-info-dialog';
+import { ReservationDetailsInfo } from './component/admin-reservation-management/reservation-table/reservation-details-info/reservation-details-info';
+import { FillReservationDetails } from './component/admin-reservation-management/reservation-table/fill-reservation-details/fill-reservation-details';
+import {AdminVisitDetailsApiService} from './services/admin-visit-details-api.service';
 
 @NgModule({
   imports: [
@@ -56,7 +59,9 @@ import { ContactInfoDialog } from './component/admin-reservation-overview/contac
     AdminReservationOverviewComponent,
     AdminReservationNoteManagementComponent,
     AdminReservationNoteDialog,
-    ContactInfoDialog
+    ContactInfoDialog,
+    ReservationDetailsInfo,
+    FillReservationDetails
   ],
     exports: [
         ReservationTableComponent,
@@ -64,7 +69,8 @@ import { ContactInfoDialog } from './component/admin-reservation-overview/contac
     ],
   providers: [
     AdminReservationManagementApiService,
-    ReservationApiService
+    ReservationApiService,
+    AdminVisitDetailsApiService
   ]
 })
 export class AdminReservationManagementModule {

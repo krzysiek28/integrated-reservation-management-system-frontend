@@ -1,0 +1,22 @@
+<div class="content">
+  <h1 mat-dialog-title>Dodaj notatkę dotyczącą wizyty</h1>
+  <div mat-dialog-content>
+    <div *ngIf="data.personalData" class="personal-data">
+      <p><mat-label> Imię: </mat-label> <strong> {{data.personalData?.firstName}} </strong></p>
+      <p><mat-label> Nazwisko: </mat-label> <strong> {{data.personalData?.lastName}} </strong></p>
+      <p><mat-label> Telefon kontaktowy: </mat-label> <strong> {{data.personalData?.phoneNumber}} </strong></p>
+      <p *ngIf="data.personalData?.contactEmail"><mat-label> Email: </mat-label> <strong> {{data.personalData?.contactEmail}} </strong></p>
+    </div>
+    <div *ngIf="data.visitDetails" class="visit-details">
+      <p><mat-label> Notatka dotycząca wizyty </mat-label> <strong> {{data.visitDetails.note}} </strong></p>
+      <p><mat-label> Cena wizyty </mat-label> <strong> {{data.visitDetails.cost}} </strong></p>
+    </div>
+    <p *ngIf="data.comment"><mat-label> Komentarz od rezerwującego </mat-label> <strong> {{data.comment}} </strong></p>
+    <p><mat-label> Data </mat-label> <strong> {{data.date | date:  'shortDate'}} </strong></p>
+    <p><mat-label> Czas rozpoczęcia </mat-label> <strong> {{data.timeFrom}} </strong></p>
+    <p><mat-label> Czas zakończenia </mat-label> <strong> {{data.timeTo}} </strong></p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Ok</button>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import {AppConsts} from '../../../../root/app-consts';
 import {ReservationModel} from '../../../../objects/models/ReservationModel';
 import {Observable} from 'rxjs';
 import {ReservationSearchRequest} from '../objects/ReservationSearchRequest';
+import {ReservationStatus} from '../../../../objects/models/ReservationStatus';
 
 @Injectable()
 export class AdminReservationManagementApiService {
@@ -37,5 +38,9 @@ export class AdminReservationManagementApiService {
 
   public fetchClosedReservations(): Observable<ReservationModel[]> {
     return this.http.get<ReservationModel[]>(this._url + '/getClosedReservationsForLastMonth');
+  }
+
+  public changeStatusToClosed(reservationId: number): Observable<ReservationModel> {
+    return this.http.patch<ReservationModel>(this._url + '/changeStatusToClosed/' + reservationId, ReservationStatus.CLOSED);
   }
 }

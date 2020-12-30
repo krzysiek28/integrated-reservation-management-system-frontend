@@ -8,6 +8,10 @@ import {ConfirmationPopup} from '../../../../../../../utils/confirmation-popup/c
 import {ReservationUtils} from '../../../../../../../utils/ReservationUtils';
 import {PersonalDataModel} from '../../../../../../../objects/models/PersonalDataModel';
 import {ContactInfoDialog} from '../../../admin-reservation-overview/contact-info-dialog/contact-info-dialog';
+import {AppContextService} from '../../../../../../../context/app-context.service';
+import {FillReservationDetails} from '../fill-reservation-details/fill-reservation-details';
+import {AdminVisitDetailsApiService} from '../../../../services/admin-visit-details-api.service';
+import {ReservationDetailsInfo} from '../reservation-details-info/reservation-details-info';
 
 @Component({
   selector: 'app-reservation-col',
@@ -21,16 +25,19 @@ export class ReservationColComponent implements OnInit {
   @Input('accessToRemove') accessToRemove: boolean = false;
   @Input('accessToReservation') accessToReservation: boolean = false;
   @Input('accessToContactInfo') accessToContactInfo: boolean = false;
-  @Output('onDeleteItem') onDeleteItemEventEmitter: EventEmitter<any> = new EventEmitter();
-  @Output('onDetailsClick') onDetailsClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
+  @Output('onReservationListChange') onReservationListChangeEventEmitter: EventEmitter<any> = new EventEmitter();
   @Output('onReservationClick') onReservationClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
   reservationStatuses = ReservationStatus;
+  loggedAsAdmin = false;
 
   constructor(private _reservationApiService: AdminReservationManagementApiService,
-              private _dialog: MatDialog) {
+              private _dialog: MatDialog,
+              private _appContext: AppContextService,
+              private _visitDetailsApiService: AdminVisitDetailsApiService) {
   }
 
   ngOnInit(): void {
+    this.loggedAsAdmin = this._appContext.isLoggedAsAdmin();
   }
 
   removeReservation(value) {
@@ -42,18 +49,41 @@ export class ReservationColComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (isNotNullOrUndefined(result)) {
         this._reservationApiService.deleteReservation(value.id).subscribe(() => {
-          this.onDeleteItemEventEmitter.emit(value.id);
+          this.onReservationListChangeEventEmitter.emit();
         });
       }
     });
   }
 
   detailsClicked(reservation: ReservationModel) {
-    this.onDetailsClickEventEmitter.emit(reservation);
+    const dialogRef = this._dialog.open(ReservationDetailsInfo, {
+      width: '600px',
+      data: reservation
+    });
+
+    dialogRef.afterClosed().subscribe();
+  }
+
+  addDetailsClicked(reservation: ReservationModel) {
+    const dialogRef = this._dialog.open(FillReservationDetails, {
+      width: '600px',
+      data: reservation
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (isNotNullOrUndefined(result)) {
+        this._visitDetailsApiService.addVisitDetails(result, reservation.id).subscribe(() => this.onReservationListChangeEventEmitter.emit());
+      }
+    });
   }
 
   reservationClicked(reservation: ReservationModel) {
     this.onReservationClickEventEmitter.emit(reservation);
+  }
+
+  markAsCanceled(reservation: ReservationModel) {
+    //todo mark as canceled conf popup
+    this.onReservationListChangeEventEmitter.emit()
   }
 
   onContactInfoClick(reservation: ReservationModel) {

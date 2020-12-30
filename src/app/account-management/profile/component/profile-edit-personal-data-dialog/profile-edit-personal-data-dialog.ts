@@ -24,5 +24,4 @@ export class ProfileEditPersonalDataDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

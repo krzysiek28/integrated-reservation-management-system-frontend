@@ -8,11 +8,30 @@
       <span class="spacer"></span>
       <span> {{reservation.status | transformReservationStatus}}</span>
       <div class="space">
-        <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.AVAILABLE && accessToRemove" (click)="removeReservation(reservation)">delete</mat-icon>
-        <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails" (click)="detailsClicked(reservation)">description</mat-icon>
-        <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.AVAILABLE && accessToReservation" (click)="reservationClicked(reservation)">queue</mat-icon>
-        <mat-icon class="clickable-icon" *ngIf="(reservation.status === reservationStatuses.RESERVED || reservation.status === reservationStatuses.CLOSED) && accessToContactInfo" (click)="onContactInfoClick(reservation)">account_circle</mat-icon>
+        <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.AVAILABLE && accessToRemove"
+                  (click)="removeReservation(reservation)">delete
+        </mat-icon>
+        <mat-icon class="clickable-icon"
+                  *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails && loggedAsAdmin"
+                  (click)="detailsClicked(reservation)">description
+        </mat-icon>
+        <mat-icon class="clickable-icon"
+                  *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails && loggedAsAdmin && !reservation.visitDetails"
+                  (click)="addDetailsClicked(reservation)">add_comment
+        </mat-icon>
+        <mat-icon class="clickable-icon"
+                  *ngIf="reservation.status === reservationStatuses.AVAILABLE && accessToReservation"
+                  (click)="reservationClicked(reservation)">queue
+        </mat-icon>
+        <mat-icon class="clickable-icon"
+                  *ngIf="(reservation.status === reservationStatuses.RESERVED || reservation.status === reservationStatuses.CLOSED) && accessToContactInfo && reservation.personalData"
+                  (click)="onContactInfoClick(reservation)">account_circle
+        </mat-icon>
+        <mat-icon class="clickable-icon"
+                  *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails && loggedAsAdmin"
+                  (click)="markAsCanceled(reservation)">block
+        </mat-icon>
       </div>
-   </mat-toolbar-row>
+    </mat-toolbar-row>
   </div>
 </mat-toolbar>

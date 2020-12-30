@@ -1,0 +1,9 @@
+.form-textarea {
+  width: 100%;
+  margin: auto;
+}
+
+input.cost::-webkit-outer-spin-button,
+input.cost::-webkit-inner-spin-button {
+  display: none;
+}

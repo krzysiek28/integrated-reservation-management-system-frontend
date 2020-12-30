@@ -5,7 +5,6 @@ export class AdminReservationManagementConsts {
 export class ReservationManagementControlNames {
   public static COST: string = 'cost';
   public static NOTE: string = 'note';
-  public static VISIT_STATUS: string = 'visitStatus';
   public static DATE_FROM: string = 'dateFrom';
   public static DATE_TO: string = 'dateTo';
   public static DATE: string = 'date';

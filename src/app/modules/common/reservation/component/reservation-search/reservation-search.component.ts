@@ -33,6 +33,7 @@ export class ReservationSearchComponent implements OnInit {
 
   searchReservations() {
     if (this.searchFormGroup.valid) {
+      this.reservationList = new Array();
       this._reservationApi.findAvailableReservationsByDateRange(this.getDateFromControl().value, this.getDateToControl().value).subscribe(response => {
         this.reservationList = response;
       });

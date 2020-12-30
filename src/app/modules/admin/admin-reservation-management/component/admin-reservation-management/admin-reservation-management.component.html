@@ -96,5 +96,5 @@
 <div class="container-right">
   <app-reservation-col [reservationByDate]="reservationList"
                        [accessToRemove]="true"
-                       (onDeleteItem)="fetchReservationListBySelectedTab()"></app-reservation-col>
+                       (onReservationListChange)="fetchReservationListBySelectedTab()"></app-reservation-col>
 </div>

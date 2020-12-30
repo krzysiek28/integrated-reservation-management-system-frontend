@@ -1,5 +1,6 @@
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReservationManagementControlNames} from './admin-reservation-management-consts';
+import {VisitDetailsModel} from '../../../../objects/models/VisitDetailsModel';
 
 export class AdminReservationManagementFormGenerator {
 
@@ -28,6 +29,13 @@ export class AdminReservationManagementFormGenerator {
       [ReservationManagementControlNames.TIME_FROM]: new FormControl(null),
       [ReservationManagementControlNames.TIME_TO]: new FormControl(null),
       [ReservationManagementControlNames.RESERVATION_STATUS]: new FormControl('Dowolny', Validators.required)
+    });
+  }
+
+  public static generateVisitDetailsFormGroup(visitDetails?: VisitDetailsModel): FormGroup {
+    return new FormGroup({
+      [ReservationManagementControlNames.COST]: new FormControl(visitDetails?.cost, Validators.min(0)),
+      [ReservationManagementControlNames.NOTE]: new FormControl(visitDetails?.note),
     });
   }
 }
