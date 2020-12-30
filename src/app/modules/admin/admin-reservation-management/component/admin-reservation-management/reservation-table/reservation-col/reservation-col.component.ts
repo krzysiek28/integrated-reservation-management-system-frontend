@@ -82,8 +82,18 @@ export class ReservationColComponent implements OnInit {
   }
 
   markAsCanceled(reservation: ReservationModel) {
-    //todo mark as canceled conf popup
-    this.onReservationListChangeEventEmitter.emit()
+    const dialogRef = this._dialog.open(ConfirmationPopup, {
+      width: '400px',
+      data: 'Czy na pewno chcesz zmienić status wizyty na anulowana?'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (isNotNullOrUndefined(result)) {
+        this._reservationApiService.changeReservationStatus(reservation.id, ReservationStatus.CANCELED).subscribe(() => {
+          this.onReservationListChangeEventEmitter.emit();
+        });
+      }
+    });
   }
 
   onContactInfoClick(reservation: ReservationModel) {

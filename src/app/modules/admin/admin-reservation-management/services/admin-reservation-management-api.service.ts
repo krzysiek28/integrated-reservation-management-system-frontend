@@ -40,7 +40,7 @@ export class AdminReservationManagementApiService {
     return this.http.get<ReservationModel[]>(this._url + '/getClosedReservationsForLastMonth');
   }
 
-  public changeStatusToClosed(reservationId: number): Observable<ReservationModel> {
-    return this.http.patch<ReservationModel>(this._url + '/changeStatusToClosed/' + reservationId, ReservationStatus.CLOSED);
+  public changeReservationStatus(reservationId: number, reservationStatus: ReservationStatus): Observable<ReservationModel> {
+    return this.http.patch<ReservationModel>(this._url + '/changeStatus/' + reservationId, reservationStatus.toString());
   }
 }

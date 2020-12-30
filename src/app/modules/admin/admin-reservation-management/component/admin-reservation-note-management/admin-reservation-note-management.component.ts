@@ -14,12 +14,16 @@ export class AdminReservationNoteManagementComponent implements OnInit {
   constructor(private _reservationApiService: AdminReservationManagementApiService) { }
 
   ngOnInit(): void {
-    this._reservationApiService.fetchClosedReservations().subscribe(response => {
-      this.closedReservations = response;
-    })
+    this.fetchClosedReservations();
   }
 
-  onDetailsClicked(reservation: ReservationModel) {
-    console.log(reservation);
+  private fetchClosedReservations() {
+    this._reservationApiService.fetchClosedReservations().subscribe(response => {
+      this.closedReservations = response;
+    });
+  }
+
+  onReservationListChange() {
+    this.fetchClosedReservations();
   }
 }
