@@ -25,6 +25,7 @@ import {ReservationStatusesPipe} from '../../../pipes/reservation-statuses.pipe'
 import { AdminReservationOverviewComponent } from './component/admin-reservation-overview/admin-reservation-overview.component';
 import { AdminReservationNoteManagementComponent } from './component/admin-reservation-note-management/admin-reservation-note-management.component';
 import { AdminReservationNoteDialog } from './component/admin-reservation-note-management/admin-reservation-note-dialog/admin-reservation-note-dialog';
+import { ContactInfoDialog } from './component/admin-reservation-overview/contact-info-dialog/contact-info-dialog';
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { AdminReservationNoteDialog } from './component/admin-reservation-note-m
     ReservationStatusesPipe,
     AdminReservationOverviewComponent,
     AdminReservationNoteManagementComponent,
-    AdminReservationNoteDialog
+    AdminReservationNoteDialog,
+    ContactInfoDialog
   ],
     exports: [
         ReservationTableComponent,

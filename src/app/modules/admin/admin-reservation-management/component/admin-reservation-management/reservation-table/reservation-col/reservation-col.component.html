@@ -7,9 +7,12 @@
       <span>Do {{reservation.timeTo }}</span>
       <span class="spacer"></span>
       <span> {{reservation.status | transformReservationStatus}}</span>
-      <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.AVAILABLE && accessToRemove" (click)="removeReservation(reservation)">delete</mat-icon>
-      <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails" (click)="detailsClicked(reservation)">description</mat-icon>
-      <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.AVAILABLE && accessToReservation" (click)="reservationClicked(reservation)">queue</mat-icon>
-    </mat-toolbar-row>
+      <div class="space">
+        <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.AVAILABLE && accessToRemove" (click)="removeReservation(reservation)">delete</mat-icon>
+        <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails" (click)="detailsClicked(reservation)">description</mat-icon>
+        <mat-icon class="clickable-icon" *ngIf="reservation.status === reservationStatuses.AVAILABLE && accessToReservation" (click)="reservationClicked(reservation)">queue</mat-icon>
+        <mat-icon class="clickable-icon" *ngIf="(reservation.status === reservationStatuses.RESERVED || reservation.status === reservationStatuses.CLOSED) && accessToContactInfo" (click)="onContactInfoClick(reservation)">account_circle</mat-icon>
+      </div>
+   </mat-toolbar-row>
   </div>
 </mat-toolbar>

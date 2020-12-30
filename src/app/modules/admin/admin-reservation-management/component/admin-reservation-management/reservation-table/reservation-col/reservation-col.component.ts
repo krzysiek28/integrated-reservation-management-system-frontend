@@ -6,6 +6,8 @@ import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmationPopup} from '../../../../../../../utils/confirmation-popup/confirmation-popup';
 import {ReservationUtils} from '../../../../../../../utils/ReservationUtils';
+import {PersonalDataModel} from '../../../../../../../objects/models/PersonalDataModel';
+import {ContactInfoDialog} from '../../../admin-reservation-overview/contact-info-dialog/contact-info-dialog';
 
 @Component({
   selector: 'app-reservation-col',
@@ -18,6 +20,7 @@ export class ReservationColComponent implements OnInit {
   @Input('accessToDetails') accessToDetails: boolean = false;
   @Input('accessToRemove') accessToRemove: boolean = false;
   @Input('accessToReservation') accessToReservation: boolean = false;
+  @Input('accessToContactInfo') accessToContactInfo: boolean = false;
   @Output('onDeleteItem') onDeleteItemEventEmitter: EventEmitter<any> = new EventEmitter();
   @Output('onDetailsClick') onDetailsClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
   @Output('onReservationClick') onReservationClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
@@ -51,6 +54,18 @@ export class ReservationColComponent implements OnInit {
 
   reservationClicked(reservation: ReservationModel) {
     this.onReservationClickEventEmitter.emit(reservation);
+  }
+
+  onContactInfoClick(reservation: ReservationModel) {
+    this.openContactInfoDialog(reservation.personalData);
+  }
+
+  private openContactInfoDialog(personalDataModel: PersonalDataModel): void {
+    const dialogRef = this._dialog.open(ContactInfoDialog, {
+      width: '350px',
+      data: personalDataModel
+    });
+    dialogRef.afterClosed().subscribe();
   }
 
   getClassName(reservation: ReservationModel) {

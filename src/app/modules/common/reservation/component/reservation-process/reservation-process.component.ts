@@ -57,13 +57,15 @@ export class ReservationProcessComponent implements OnInit {
   }
 
   makeReservation() {
-    this._reservationApiService.reserve(this.reservationId, {
-      userId: this._appContext.isLoggedAsUser() ? this._appContext.getUser().id : null,
-      personalDataModel: this.createPersonalDataModel(),
-      comment: this.reservationInformationFormGroup.get(this.reservationControlNames.COMMENT).value
-    }).subscribe(result => {
-      this.reservationModel = result;
-    })
+    if(this.reservationInformationFormGroup.valid){
+      this._reservationApiService.reserve(this.reservationId, {
+        userId: this._appContext.isLoggedAsUser() ? this._appContext.getUser().id : null,
+        personalDataModel: this.createPersonalDataModel(),
+        comment: this.reservationInformationFormGroup.get(this.reservationControlNames.COMMENT).value
+      }).subscribe(result => {
+        this.reservationModel = result;
+      })
+    }
   }
 
   private createPersonalDataModel(): PersonalDataModel {

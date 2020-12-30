@@ -6,6 +6,7 @@ import {ReservationManagementControlNames} from '../../utils/admin-reservation-m
 import {ReservationModel} from '../../../../../objects/models/ReservationModel';
 import {ReservationSearchRequest} from '../../objects/ReservationSearchRequest';
 import {ReservationStatus} from '../../../../../objects/models/ReservationStatus';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-admin-reservation-overview',
@@ -19,7 +20,8 @@ export class AdminReservationOverviewComponent implements OnInit {
   reservationStatuses: string[] = ['Zarezerwowana', 'Dostępna', 'Odwołana', 'Zrealizowana', 'Dowolny'];
   reservationList: ReservationModel[];
 
-  constructor(private _reservationApiService: AdminReservationManagementApiService) {
+  constructor(private _reservationApiService: AdminReservationManagementApiService,
+              private _dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class AdminReservationOverviewComponent implements OnInit {
     }
   }
 
-  onDetailsClicked(value) {
+  onDetailsClicked(reservationModel: ReservationModel) {
 
   }
 
