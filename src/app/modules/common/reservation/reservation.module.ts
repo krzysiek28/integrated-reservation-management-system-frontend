@@ -6,7 +6,7 @@ import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {ReservationSearchComponent} from './component/reservation-search/reservation-search.component';
-import {OldReservationsOverviewComponent} from './component/old-reservations-overview/old-reservations-overview.component';
+import {OwnReservationsOverviewComponent} from './component/own-reservations-overview/own-reservations-overview.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -33,7 +33,7 @@ import {MatStepperModule} from '@angular/material/stepper';
   declarations: [
     ReservationDesktopComponent,
     ReservationSearchComponent,
-    OldReservationsOverviewComponent,
+    OwnReservationsOverviewComponent,
     ReservationProcessComponent
   ]
 })

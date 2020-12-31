@@ -3,8 +3,8 @@ import {AppConsts} from '../../../../root/app-consts';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ReservationModel} from '../../../../objects/models/ReservationModel';
 import {Observable} from 'rxjs';
-import {PersonalDataModel} from '../../../../objects/models/PersonalDataModel';
 import {ReserveRequest} from '../objects/ReserveRequest';
+import {ReservationStatus} from '../../../../objects/models/ReservationStatus';
 
 @Injectable()
 export class ReservationApiService {
@@ -15,8 +15,13 @@ export class ReservationApiService {
     this._url = AppConsts.SERVER_BASIC_URL + AppConsts.RESERVATION_API_PATH;
   }
 
-  public deleteReservation(reservationId: number) {
-    return this.http.delete<number>(this._url + '/reservation/' + reservationId);
+  public changeReservationStatus(reservationId: number, reservationStatus: ReservationStatus): Observable<ReservationModel> {
+    return this.http.patch<ReservationModel>(this._url + '/changeStatus/' + reservationId, reservationStatus.toString());
+  }
+
+  public getOwnReservations(userId: number): Observable<ReservationModel[]> {
+    let params = new HttpParams().set('userId', userId.toString());
+    return this.http.get<ReservationModel[]>(this._url + '/getOwnReservations', {params: params});
   }
 
   public getReservation(id: number): Observable<ReservationModel> {
@@ -24,7 +29,7 @@ export class ReservationApiService {
   }
 
   public reserve(reservationId: number, reserveRequest: ReserveRequest): Observable<ReservationModel> {
-    return this.http.put<ReservationModel>(this._url + '/reserve/' + reservationId, reserveRequest);
+    return this.http.patch<ReservationModel>(this._url + '/reserve/' + reservationId, reserveRequest);
   }
 
   public findAvailableReservationsByDateRange(startDate: Date, endDate: Date): Observable<ReservationModel[]> {

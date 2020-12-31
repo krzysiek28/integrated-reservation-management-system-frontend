@@ -12,7 +12,7 @@
                   (click)="removeReservation(reservation)">delete
         </mat-icon>
         <mat-icon class="clickable-icon"
-                  *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails && loggedAsAdmin"
+                  *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails && reservation.visitDetails"
                   (click)="detailsClicked(reservation)">description
         </mat-icon>
         <mat-icon class="clickable-icon"
