@@ -57,6 +57,7 @@ export class ReservationProcessComponent implements OnInit {
   }
 
   makeReservation() {
+    this.enableFormGroup();
     if(this.reservationInformationFormGroup.valid){
       this._reservationApiService.reserve(this.reservationId, {
         userId: this._appContext.isLoggedAsUser() ? this._appContext.getUser().id : null,
@@ -79,5 +80,13 @@ export class ReservationProcessComponent implements OnInit {
 
   getClassName(reservation: ReservationModel) {
     return ReservationUtils.getClassName(reservation);
+  }
+
+  disableFormGroup() {
+    this.reservationInformationFormGroup.disable();
+  }
+
+  enableFormGroup() {
+    this.reservationInformationFormGroup.enable();
   }
 }

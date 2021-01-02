@@ -31,6 +31,10 @@
                   *ngIf="reservation.status === reservationStatuses.CLOSED && accessToDetails && loggedAsAdmin"
                   (click)="markAsCanceled(reservation)">block
         </mat-icon>
+        <mat-icon class="clickable-icon"
+                  *ngIf="reservation.status === reservationStatuses.RESERVED && accessToCancelReservation && !loggedAsAdmin"
+                  (click)="cancelReservation(reservation)">clear
+        </mat-icon>
       </div>
     </mat-toolbar-row>
   </div>

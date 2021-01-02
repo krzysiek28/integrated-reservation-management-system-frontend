@@ -21,14 +21,15 @@ import {ReservationTableComponent} from './component/admin-reservation-managemen
 import {ReservationColComponent} from './component/admin-reservation-management/reservation-table/reservation-col/reservation-col.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-import {ReservationStatusesPipe} from '../../../pipes/reservation-statuses.pipe';
-import { AdminReservationOverviewComponent } from './component/admin-reservation-overview/admin-reservation-overview.component';
-import { AdminReservationNoteManagementComponent } from './component/admin-reservation-note-management/admin-reservation-note-management.component';
-import { AdminReservationNoteDialog } from './component/admin-reservation-note-management/admin-reservation-note-dialog/admin-reservation-note-dialog';
-import { ContactInfoDialog } from './component/admin-reservation-overview/contact-info-dialog/contact-info-dialog';
-import { ReservationDetailsInfo } from './component/admin-reservation-management/reservation-table/reservation-details-info/reservation-details-info';
-import { FillReservationDetails } from './component/admin-reservation-management/reservation-table/fill-reservation-details/fill-reservation-details';
+import {AdminReservationOverviewComponent} from './component/admin-reservation-overview/admin-reservation-overview.component';
+import {AdminReservationNoteManagementComponent} from './component/admin-reservation-note-management/admin-reservation-note-management.component';
+import {AdminReservationNoteDialog} from './component/admin-reservation-note-management/admin-reservation-note-dialog/admin-reservation-note-dialog';
+import {ContactInfoDialog} from './component/admin-reservation-overview/contact-info-dialog/contact-info-dialog';
+import {ReservationDetailsInfo} from './component/admin-reservation-management/reservation-table/reservation-details-info/reservation-details-info';
+import {FillReservationDetails} from './component/admin-reservation-management/reservation-table/fill-reservation-details/fill-reservation-details';
 import {AdminVisitDetailsApiService} from './services/admin-visit-details-api.service';
+import {PipesModule} from '../../../pipes/pipes-module';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   imports: [
@@ -47,6 +48,8 @@ import {AdminVisitDetailsApiService} from './services/admin-visit-details-api.se
     MatDialogModule,
     MatToolbarModule,
     MatIconModule,
+    PipesModule,
+    MatDividerModule
   ],
   declarations: [
     AdminReservationManagementDesktopComponent,
@@ -55,7 +58,6 @@ import {AdminVisitDetailsApiService} from './services/admin-visit-details-api.se
     AdminReservationsAddDialog,
     ReservationTableComponent,
     ReservationColComponent,
-    ReservationStatusesPipe,
     AdminReservationOverviewComponent,
     AdminReservationNoteManagementComponent,
     AdminReservationNoteDialog,
@@ -63,10 +65,9 @@ import {AdminVisitDetailsApiService} from './services/admin-visit-details-api.se
     ReservationDetailsInfo,
     FillReservationDetails
   ],
-    exports: [
-        ReservationTableComponent,
-        ReservationStatusesPipe
-    ],
+  exports: [
+    ReservationTableComponent,
+  ],
   providers: [
     AdminReservationManagementApiService,
     ReservationApiService,

@@ -1,22 +1,22 @@
 <div class="content">
-  <h1 mat-dialog-title>Dodaj notatkę dotyczącą wizyty</h1>
+  <h1 mat-dialog-title style="text-align: center">Szczegóły z odbytej wizyty</h1>
   <div mat-dialog-content>
     <div *ngIf="data.personalData" class="personal-data">
-      <p><mat-label> Imię: </mat-label> <strong> {{data.personalData?.firstName}} </strong></p>
-      <p><mat-label> Nazwisko: </mat-label> <strong> {{data.personalData?.lastName}} </strong></p>
-      <p><mat-label> Telefon kontaktowy: </mat-label> <strong> {{data.personalData?.phoneNumber}} </strong></p>
-      <p *ngIf="data.personalData?.contactEmail"><mat-label> Email: </mat-label> <strong> {{data.personalData?.contactEmail}} </strong></p>
+      <div class="position-left"> Imię: </div> <div class="position-right"> <strong> {{data.personalData?.firstName}} </strong></div>
+      <div class="position-left"> Nazwisko: </div> <div class="position-right"> <strong> {{data.personalData?.lastName}} </strong></div>
+      <div class="position-left"> Telefon kontaktowy: </div> <div class="position-right"> <strong> {{data.personalData?.phoneNumber}} </strong></div>
+      <div class="position-left" *ngIf="data.personalData?.contactEmail"> Email: </div> <div class="position-right"> <strong> {{data.personalData?.contactEmail}} </strong></div>
     </div>
     <div *ngIf="data.visitDetails" class="visit-details">
-      <p><mat-label> Notatka dotycząca wizyty </mat-label> <strong> {{data.visitDetails.note}} </strong></p>
-      <p><mat-label> Cena wizyty </mat-label> <strong> {{data.visitDetails.cost}} </strong></p>
+      <div class="position-left"> Notatka dotycząca wizyty </div> <div class="position-right"> <strong> {{data.visitDetails.note}} </strong></div>
+      <div class="position-left"> Cena wizyty </div> <div class="position-right"> <strong> {{data.visitDetails.cost | currencyPln}} </strong></div>
     </div>
-    <p *ngIf="data.comment"><mat-label> Komentarz od rezerwującego </mat-label> <strong> {{data.comment}} </strong></p>
-    <p><mat-label> Data </mat-label> <strong> {{data.date | date:  'shortDate'}} </strong></p>
-    <p><mat-label> Czas rozpoczęcia </mat-label> <strong> {{data.timeFrom}} </strong></p>
-    <p><mat-label> Czas zakończenia </mat-label> <strong> {{data.timeTo}} </strong></p>
+    <div class="position-left" *ngIf="data.comment"> Komentarz od rezerwującego </div> <div class="data"> <strong> {{data.comment}} </strong></div>
+    <div class="position-left"> Data </div> <div class="position-right"> <strong> {{data.date | date:  'shortDate'}} </strong></div>
+    <div class="position-left"> Czas rozpoczęcia </div> <div class="position-right"> <strong> {{data.timeFrom}} </strong></div>
+    <div class="position-left"> Czas zakończenia </div> <div class="position-right"> <strong> {{data.timeTo}} </strong></div>
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Ok</button>
+    <button mat-button (click)="onNoClick()" class="display-center">OK</button>
   </div>
 </div>

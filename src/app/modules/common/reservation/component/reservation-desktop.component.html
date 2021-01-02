@@ -14,37 +14,3 @@
     <app-reservation-search></app-reservation-search>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-<!--
-
-  <h1>Reservation page body</h1>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Wprowadź zakres dat</mat-label>
-    <mat-date-range-input [formGroup]="formGroup" [rangePicker]="picker">
-      <input matStartDate formControlName="startDate" placeholder="Data od">
-      <input matEndDate formControlName="endDate" placeholder="Data do">
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
-
-    <mat-error *ngIf="formGroup.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-    <mat-error *ngIf="formGroup.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-  </mat-form-field>
-
-  <p>Selected range: {{formGroup.value | json}}</p>
-
-  <mat-date-range-picker #picker></mat-date-range-picker>
-  <button class="card card-small" (click)="searchReservations()">Szukaj terminu</button>
-
-</div>
--->

@@ -26,7 +26,6 @@
 }
 
 
-
 .align-center {
   display: block;
   margin: auto;
@@ -63,9 +62,40 @@
 }
 
 .float-right {
-  float:right;
+  float: right;
 }
 
 .form-button {
   margin-top: 20px;
+}
+
+.successfullyReserved {
+  border-radius: 10px;
+  margin: auto;
+  padding: 40px 80px 30px 80px;
+  width: 40%;
+  text-align: center;
+  background-color: #76cb77;
+}
+
+.summary-info {
+  border-radius: 10px;
+  display: block;
+  margin: auto;
+  padding: 40px 80px;
+  width: 40%;
+  text-align: center;
+  background-color: rgba(234, 234, 234, 0.49);
+}
+
+.position-left {
+  display: inline-block;
+  text-align:left;
+  width: 50%;
+}
+
+.position-right {
+  display: inline-block;
+  text-align:right;
+  width: 50%;
 }

@@ -16,6 +16,7 @@ import {environment} from '../environments/environment';
 import {ReservationStatusesPipe} from './pipes/reservation-statuses.pipe';
 import { ConfirmationPopup } from './utils/confirmation-popup/confirmation-popup';
 import {MatDialogModule} from '@angular/material/dialog';
+import {CurrencyPlnPipe} from './pipes/currency-pln-pipe';
 
 export let INTERNAL_MODULES = [
   WelcomePageModule,
@@ -46,7 +47,8 @@ export let EXTERNAL_MODULES = [
   ],
   providers: [
     AppContextService,
-    ReservationStatusesPipe
+    ReservationStatusesPipe,
+    CurrencyPlnPipe
   ],
   bootstrap: [AppComponent]
 })

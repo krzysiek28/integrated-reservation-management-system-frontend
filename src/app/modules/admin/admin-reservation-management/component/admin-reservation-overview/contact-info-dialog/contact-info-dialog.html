@@ -1,10 +1,14 @@
 <div *ngIf="data" class="content">
-  <h1 mat-dialog-title>Dane rezerwującego:</h1>
+  <h1 mat-dialog-title style="text-align: center">Dane rezerwującego:</h1>
   <div mat-dialog-content>
-    <p><mat-label> Imię: </mat-label> <strong> {{data?.firstName}} </strong></p>
-    <p><mat-label> Nazwisko: </mat-label> <strong> {{data?.lastName}} </strong></p>
-    <p><mat-label> Telefon kontaktowy: </mat-label> <strong> {{data?.phoneNumber}} </strong></p>
-    <p *ngIf="data.contactEmail"><mat-label> Email: </mat-label> <strong> {{data?.contactEmail}} </strong></p>
+    <div class="position-left">Imię:</div>
+    <div class="position-right"> <strong> {{data?.firstName}} </strong></div>
+    <div class="position-left">Nazwisko:</div>
+    <div class="position-right"><strong> {{data?.lastName}} </strong></div>
+    <div class="position-left">Telefon kontaktowy:</div>
+    <div class="position-right"><strong> {{data?.phoneNumber}} </strong></div>
+    <div class="position-left" *ngIf="data.contactEmail">Email:</div>
+    <div class="position-right"><strong> {{data?.contactEmail}} </strong></div>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Ok</button>

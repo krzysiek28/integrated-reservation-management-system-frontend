@@ -1,9 +1,10 @@
 <div *ngIf="data" class="content">
   <h1 mat-dialog-title>Czy na pewno chcesz dodać wizyty?</h1>
   <div mat-dialog-content *ngFor="let reservation of data;">
-    <p><mat-label> Data </mat-label> <strong> {{reservation.date | date:  'shortDate'}} </strong></p>
-    <p><mat-label> Czas rozpoczęcia </mat-label> <strong> {{reservation.timeFrom | date:  'shortTime'}} </strong></p>
-    <p><mat-label> Czas zakończenia </mat-label> <strong> {{reservation.timeTo | date:  'shortTime'}} </strong></p>
+    <div class="position-left"> Data </div> <div class="position-right"> <strong> {{reservation.date | date:  'shortDate'}} </strong></div>
+    <div class="position-left"> Czas rozpoczęcia </div> <div class="position-right"> <strong> {{reservation.timeFrom | date:  'shortTime'}} </strong></div>
+    <div class="position-left"> Czas zakończenia </div> <div class="position-right"> <strong> {{reservation.timeTo | date:  'shortTime'}} </strong></div>
+    <mat-divider></mat-divider>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Anuluj</button>

@@ -12,6 +12,7 @@ import {AppContextService} from '../../../../../../../context/app-context.servic
 import {FillReservationDetails} from '../fill-reservation-details/fill-reservation-details';
 import {AdminVisitDetailsApiService} from '../../../../services/admin-visit-details-api.service';
 import {ReservationDetailsInfo} from '../reservation-details-info/reservation-details-info';
+import {ReservationApiService} from '../../../../../../common/reservation/services/reservation-api-service';
 
 @Component({
   selector: 'app-reservation-col',
@@ -24,13 +25,16 @@ export class ReservationColComponent implements OnInit {
   @Input('accessToDetails') accessToDetails: boolean = false;
   @Input('accessToRemove') accessToRemove: boolean = false;
   @Input('accessToReservation') accessToReservation: boolean = false;
+  @Input('accessToCancelReservation') accessToCancelReservation: boolean = false;
   @Input('accessToContactInfo') accessToContactInfo: boolean = false;
   @Output('onReservationListChange') onReservationListChangeEventEmitter: EventEmitter<any> = new EventEmitter();
   @Output('onReservationClick') onReservationClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
   reservationStatuses = ReservationStatus;
   loggedAsAdmin = false;
+  loggedAsUser = false;
 
-  constructor(private _reservationApiService: AdminReservationManagementApiService,
+  constructor(private _adminReservationApiService: AdminReservationManagementApiService,
+              private _reservationApiService: ReservationApiService,
               private _dialog: MatDialog,
               private _appContext: AppContextService,
               private _visitDetailsApiService: AdminVisitDetailsApiService) {
@@ -38,6 +42,7 @@ export class ReservationColComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedAsAdmin = this._appContext.isLoggedAsAdmin();
+    this.loggedAsUser = this._appContext.isLoggedAsUser();
   }
 
   removeReservation(value) {
@@ -48,7 +53,7 @@ export class ReservationColComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (isNotNullOrUndefined(result)) {
-        this._reservationApiService.deleteReservation(value.id).subscribe(() => {
+        this._adminReservationApiService.deleteReservation(value.id).subscribe(() => {
           this.onReservationListChangeEventEmitter.emit();
         });
       }
@@ -83,13 +88,28 @@ export class ReservationColComponent implements OnInit {
 
   markAsCanceled(reservation: ReservationModel) {
     const dialogRef = this._dialog.open(ConfirmationPopup, {
-      width: '400px',
+      width: '480px',
       data: 'Czy na pewno chcesz zmienić status wizyty na anulowana?'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (isNotNullOrUndefined(result)) {
-        this._reservationApiService.changeReservationStatus(reservation.id, ReservationStatus.CANCELED).subscribe(() => {
+        this._adminReservationApiService.changeReservationStatus(reservation.id, ReservationStatus.CANCELED).subscribe(() => {
+          this.onReservationListChangeEventEmitter.emit();
+        });
+      }
+    });
+  }
+
+  cancelReservation(reservation: ReservationModel) {
+    const dialogRef = this._dialog.open(ConfirmationPopup, {
+      width: '400px',
+      data: 'Czy na pewno chcesz odwołać wizyte?'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (isNotNullOrUndefined(result)) {
+        this._reservationApiService.changeReservationStatus(reservation.id, ReservationStatus.AVAILABLE).subscribe(() => {
           this.onReservationListChangeEventEmitter.emit();
         });
       }

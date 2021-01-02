@@ -7,3 +7,8 @@ input.cost::-webkit-outer-spin-button,
 input.cost::-webkit-inner-spin-button {
   display: none;
 }
+
+.display-center {
+  position: center;
+  margin: auto;
+}

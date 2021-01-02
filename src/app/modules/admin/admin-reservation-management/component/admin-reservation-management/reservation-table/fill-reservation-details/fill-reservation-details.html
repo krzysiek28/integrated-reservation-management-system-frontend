@@ -1,5 +1,5 @@
 <div class="content">
-  <h1 mat-dialog-title>Dodaj notatkę dotyczącą wizyty</h1>
+  <h1 mat-dialog-title style="text-align: center">Dodaj notatkę dotyczącą wizyty</h1>
   <div mat-dialog-content>
     <form *ngIf="formGroup" [formGroup]="formGroup">
       <ng-template matStepLabel>Uzupełnij dane</ng-template>
@@ -17,7 +17,7 @@
 
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Anuluj</button>
-    <button mat-button [mat-dialog-close]="formGroup.getRawValue()" cdkFocusInitial>Modyfikuj notatkę</button>
+    <button mat-button (click)="onNoClick()" class="display-center">Anuluj</button>
+    <button mat-button [mat-dialog-close]="formGroup.getRawValue()" cdkFocusInitial class="display-center">Modyfikuj notatkę</button>
   </div>
 </div>

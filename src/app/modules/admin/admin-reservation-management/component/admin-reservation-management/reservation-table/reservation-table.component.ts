@@ -13,6 +13,7 @@ export class ReservationTableComponent implements OnInit {
   @Input('accessToRemove') accessToRemove: boolean = false;
   @Input('accessToReservation') accessToReservation: boolean = false;
   @Input('accessToContactInfo') accessToContactInfo: boolean = false;
+  @Input('accessToCancelReservation') accessToCancelReservation: boolean = false;
   @Output('onReservationListChange') onReservationListChangeEventEmitter: EventEmitter<any> = new EventEmitter();
   @Output('onReservationClick') onReservationClickEventEmitter: EventEmitter<ReservationModel> = new EventEmitter();
 

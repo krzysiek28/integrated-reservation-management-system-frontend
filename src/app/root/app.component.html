@@ -4,8 +4,7 @@
 
   <div class="navButtons">
     <a routerLink="/welcome-page" class="navButton">Strona główna</a>
-<!--    <a *ngIf="applicationVariant != applicationVariants.LOGGED_AS_ADMIN" routerLink="/reservation" class="navButton">Rezerwacje</a>-->
-    <a routerLink="/reservation" class="navButton">Rezerwacje</a>
+    <a *ngIf="applicationVariant != applicationVariants.LOGGED_AS_ADMIN" routerLink="/reservation" class="navButton">Rezerwacje</a>
     <a *ngIf="applicationVariant == applicationVariants.LOGGED_AS_ADMIN" routerLink="/admin-reservation-management" class="navButton" >Zarządzanie rezerwacjami</a>
   </div>
 

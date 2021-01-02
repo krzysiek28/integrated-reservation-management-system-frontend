@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {AdminReservationManagementModule} from '../../admin/admin-reservation-management/admin-reservation-management.module';
 import {ReservationProcessComponent} from './component/reservation-process/reservation-process.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import {PipesModule} from '../../../pipes/pipes-module';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatIconModule,
     AdminReservationManagementModule,
     MatStepperModule,
+    PipesModule,
   ],
   declarations: [
     ReservationDesktopComponent,

@@ -1,9 +1,12 @@
 <div class="content">
   <h1 mat-dialog-title>Czy na pewno chcesz dodać wizyte?</h1>
   <div mat-dialog-content>
-    <p><mat-label> Data </mat-label> <strong> {{data.date | date:  'shortDate'}} </strong></p>
-    <p><mat-label> Czas rozpoczęcia </mat-label> <strong> {{data.timeFrom | date: 'shortTime'}} </strong></p>
-    <p><mat-label> Czas zakończenia </mat-label> <strong> {{data.timeTo | date: 'shortTime'}} </strong></p>
+    <div class="position-left"> Data</div>
+    <div class="position-right"><strong> {{data.date | date:  'shortDate'}} </strong></div>
+    <div class="position-left"> Czas rozpoczęcia</div>
+    <div class="position-right"><strong> {{data.timeFrom | date: 'shortTime'}} </strong></div>
+    <div class="position-left"> Czas zakończenia</div>
+    <div class="position-right"><strong> {{data.timeTo | date: 'shortTime'}} </strong></div>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Anuluj</button>

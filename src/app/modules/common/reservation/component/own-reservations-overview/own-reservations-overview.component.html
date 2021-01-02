@@ -1,5 +1,7 @@
 <app-reservation-table *ngIf="reservationList" [reservations]="reservationList"
-                       [accessToDetails]="true">
+                       [accessToDetails]="true"
+                       [accessToCancelReservation]="true"
+                       (onReservationListChange)="getOwnReservations()">
 </app-reservation-table>
 
 <div *ngIf="reservationList?.length === 0" class="no-result-info">

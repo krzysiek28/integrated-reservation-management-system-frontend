@@ -10,11 +10,14 @@
                class="profile-img-card"
           />
           <div class="personal-data-column">
-<!--            <span class="personal-data-row"> Id: {{userModel?.personalData?.id}}</span>-->
-            <span class="personal-data-row"> Imię: {{userModel?.personalData?.firstName}}</span>
-            <span class="personal-data-row"> Nazwisko: {{userModel?.personalData?.lastName}}</span>
-            <span class="personal-data-row"> Numer telefonu: {{userModel?.personalData?.phoneNumber}}</span>
-            <span class="personal-data-row"> Email kontaktowy: {{userModel?.personalData?.contactEmail}}</span>
+            <div class="position-left"> Imię:</div>
+            <div class="position-right">{{userModel?.personalData?.firstName}}</div>
+            <div class="position-left"> Nazwisko:</div>
+            <div class="position-right">{{userModel?.personalData?.lastName}}</div>
+            <div class="position-left"> Numer telefonu:</div>
+            <div class="position-right">{{userModel?.personalData?.phoneNumber}}</div>
+            <div class="position-left"> Email kontaktowy:</div>
+            <div class="position-right">{{userModel?.personalData?.contactEmail}}</div>
           </div>
           <mat-icon class="clickable-icon" (click)="openEditPersonalDataDialog()">edit</mat-icon>
         </div>

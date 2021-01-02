@@ -1,0 +1,16 @@
+.position-left {
+  display: inline-block;
+  text-align:left;
+  width: 50%;
+}
+
+.position-right {
+  display: inline-block;
+  text-align:right;
+  width: 50%;
+}
+
+.display-center {
+  position: center;
+  margin: auto;
+}

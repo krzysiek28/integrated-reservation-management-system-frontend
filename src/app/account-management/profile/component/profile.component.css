@@ -29,10 +29,6 @@
   padding: 40px 40px;
 }
 
-.personal-data-row {
-  display: flex;
-}
-
 .profile-column {
   display: flex;
 }
@@ -40,9 +36,20 @@
 .personal-data-column {
   padding-left: 40px;
   margin: auto;
-  /*padding-right: 200px;*/
 }
 
 .clickable-icon {
   cursor: pointer;
+}
+
+.position-left {
+  display: inline-block;
+  text-align:left;
+  width: 50%;
+}
+
+.position-right {
+  display: inline-block;
+  text-align:right;
+  width: 50%;
 }
