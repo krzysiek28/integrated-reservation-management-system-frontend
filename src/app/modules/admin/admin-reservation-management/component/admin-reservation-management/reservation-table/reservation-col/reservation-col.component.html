@@ -24,7 +24,7 @@
                   (click)="reservationClicked(reservation)">queue
         </mat-icon>
         <mat-icon class="clickable-icon"
-                  *ngIf="(reservation.status === reservationStatuses.RESERVED || reservation.status === reservationStatuses.CLOSED) && accessToContactInfo && reservation.personalData"
+                  *ngIf="(reservation.status === reservationStatuses.RESERVED || reservation.status === reservationStatuses.CLOSED || reservation.status === reservationStatuses.CANCELED) && accessToContactInfo && reservation.personalData"
                   (click)="onContactInfoClick(reservation)">account_circle
         </mat-icon>
         <mat-icon class="clickable-icon"

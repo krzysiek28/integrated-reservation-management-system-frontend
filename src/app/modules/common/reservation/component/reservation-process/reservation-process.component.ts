@@ -21,6 +21,7 @@ export class ReservationProcessComponent implements OnInit {
   reservationModel: ReservationModel;
   reservationId: number;
   reservationInformationFormGroup: FormGroup;
+  resultInformationFormGroup: FormGroup;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -57,7 +58,7 @@ export class ReservationProcessComponent implements OnInit {
   }
 
   makeReservation() {
-    this.enableFormGroup();
+    this.resultInformationFormGroup.enable();
     if(this.reservationInformationFormGroup.valid){
       this._reservationApiService.reserve(this.reservationId, {
         userId: this._appContext.isLoggedAsUser() ? this._appContext.getUser().id : null,
@@ -65,6 +66,7 @@ export class ReservationProcessComponent implements OnInit {
         comment: this.reservationInformationFormGroup.get(this.reservationControlNames.COMMENT).value
       }).subscribe(result => {
         this.reservationModel = result;
+        this.reservationModel.personalData = this.createPersonalDataModel();
       })
     }
   }
@@ -82,11 +84,8 @@ export class ReservationProcessComponent implements OnInit {
     return ReservationUtils.getClassName(reservation);
   }
 
-  disableFormGroup() {
-    this.reservationInformationFormGroup.disable();
-  }
-
-  enableFormGroup() {
-    this.reservationInformationFormGroup.enable();
+  onResultScreen() {
+    this.resultInformationFormGroup = this.reservationInformationFormGroup;
+    this.resultInformationFormGroup.disable();
   }
 }
